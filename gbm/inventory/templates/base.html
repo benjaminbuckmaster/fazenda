@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <title>LSC GBM</title>
 </head>
 <header>
-    <h1>LSC Green Bean Manager</h1>
+    <h1 href="{% url 'home' %}">LSC Green Bean Manager</h1>
 </header>
 <body>
     {% block content %}{% endblock content %}
 </body>
 <footer>
-
+    <div class="footer-block">
+        <a href="{% url 'home' %}" class="footer-item">Go Home</a>
+    </div>
 </footer>
 </html>
 
