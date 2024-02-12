@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>hello</h1>
+<h2>Bean Information</h2>
+{% if beans %}
+<div class="bean-info-container">
+    {% for bean in beans %}
+    <p class="bean-information">{{ bean }}</p>
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock content %}
