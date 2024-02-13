@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;700&display=swap');
 
 html {
     font-size: 16px;
@@ -18,12 +18,28 @@ h1 {
     color: rgb(216, 255, 223);
 }
 
+h2 {
+    color: rgb(38, 255, 0);
+}
+
 .bean-info-container {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(255, 255, 255, 0.8);
 }
 
-.bean-information {
+.bean-info {
+    display: flex;
     color: rgb(13, 56, 57);
+    font-weight: 400;
+}
+
+.bean-info-header {
+    display: flex;
+}
+
+.bean-info p, .bean-info-header h4 {
+    width: 20%;
 }
 
 .footer-block {
