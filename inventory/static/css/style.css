@@ -34,6 +34,12 @@ a {
     text-decoration: none;
 }
 
+.content-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .navbar {
     display: flex;
     background-color: rgb(20, 69, 44);
@@ -79,31 +85,28 @@ a {
     background-color: rgba(65, 115, 89, 0.8);
 }
 
-#bean-info-container {
+.table-container {
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 11px;
+    width: 80%;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
-.bean-info {
+.table-row {
     display: flex;
     color: rgb(13, 56, 57);
     font-weight: 400;
 }
 
-.bean-info-header {
+.table-header {
     display: flex;
 }
 
-.bean-info p, .bean-info-header h4 {
-    width: 20%;
-}
-
-#bean-info-container {
-    margin: 20px;
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+.table-row p, .table-header h4 {
+    flex: 1;
 }
 
 #footer-block {

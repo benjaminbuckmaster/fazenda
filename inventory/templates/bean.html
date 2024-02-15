@@ -1,27 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Bean Information</h2>
-{% if beans %}
-<div id="bean-info-container">
-    <div class="bean-info-header">
-        <h4>Name</h4>
-        <h4>Origin</h4>
-        <h4>Supplier</h4>
-        <h4>Notes</h4>
-        <h4>Reorder Trigger</h4>
-        <h4>Reorder Quantity</h4>
+<div class="content-block">
+    <h2>Bean Information</h2>
+    {% if beans %}
+    <div class="table-container">
+        <div class="table-header">
+            <h4>Name</h4>
+            <h4>Origin</h4>
+            <h4>Supplier</h4>
+            <h4>Notes</h4>
+            <h4>Reorder Trigger</h4>
+            <h4>Reorder Quantity</h4>
+        </div>
+        {% for bean in beans %}
+        <div class="table-row">
+            <p>{{ bean.name }}</p>
+            <p>{{ bean.origin }}</p>
+            <p>{{ bean.supplier }}</p>
+            <p>{{ bean.notes }}</p>
+            <p>{{ bean.reorder_trigger }}</p>
+            <p>{{ bean.reorder_qty }}</p>
+        </div>
+        {% endfor %}
     </div>
-    {% for bean in beans %}
-    <div class="bean-info">
-        <p>{{ bean.name }}</p>
-        <p>{{ bean.origin }}</p>
-        <p>{{ bean.supplier }}</p>
-        <p>{{ bean.notes }}</p>
-        <p>{{ bean.reorder_trigger }}</p>
-        <p>{{ bean.reorder_qty }}</p>
-    </div>
-    {% endfor %}
+    {% endif %}
 </div>
-{% endif %}
 {% endblock content %}

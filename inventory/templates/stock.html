@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-block">
+    <h2>Stock Management</h2>
+    <div class="table-container">
+        <div class="table-header">
+            <h4>Bean Name</h4>
+            <h4>Total Quantity</h4>
+        </div>
+        {% for stock_total in stock_totals %}
+        <div class="table-row">
+            <p>{{stock_total.bean.name}}</p>
+            <p>{{stock_total.total_quantity}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
