@@ -7,19 +7,19 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <title>LSC GBM</title>
+    <title>LSC Fazenda</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div id="nav-container">
                 <div id="logo-and-name">
-                    <img id="header-logo" src="{% static 'img/lsc-logo-light.png' %}" alt="Luckie Street Coffee Logo">
+                    <a href="{% url 'home' %}"><img id="header-logo" src="{% static 'img/lsc-logo-light.png' %}" alt="Luckie Street Coffee Logo"></a>
                     <p><h1>Fazenda</h1></p>
                 </div>
                 <div id="nav-items">
-                    <a href="{% url 'bean-information' %}">View Beans</a>
-                    <a href="{% url 'stock-management' %}">Manage Stock</a>
+                    <a class="nav-btn" href="{% url 'bean-information' %}">View Beans</a>
+                    <a class="nav-btn" href="{% url 'stock-management' %}">Manage Stock</a>
                 </div>
             </div>
         </nav>
@@ -28,8 +28,11 @@
     {% block content %}{% endblock content %}
 
     <footer>
-        <div class="footer-block">
-            <p><a href="{% url 'home' %}" class="footer-item">Go Home</a></p>
+        <div id="footer-block">
+            <div id="footer-container">
+                <a class="footer-btn" href="http://www.luckiestreetcoffee.com">LSC Website</a>
+                <p>Benjamin Buckmaster 2024</p>
+            </div>
         </div>
     </footer>
 </body>

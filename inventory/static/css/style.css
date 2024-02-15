@@ -3,6 +3,8 @@
 html {
     font-size: 16px;
     font-weight: 100;
+    color: rgb(217, 217, 217);
+    font-weight: 200;
 }
 
 body {
@@ -15,12 +17,21 @@ body {
 }
 
 h1 {
-    color: rgb(255, 255, 255);
+    color: rgb(218, 231, 221);
     font-size: 2rem;
 }
 
 h2 {
     color: rgb(184, 216, 177);
+}
+
+h4 {
+    color: black;
+}
+
+a {
+    color: rgb(184, 184, 184);
+    text-decoration: none;
 }
 
 .navbar {
@@ -54,21 +65,21 @@ h2 {
     justify-content: space-around;
 }
 
-a {
+.nav-btn {
     color: white;
     background-color: rgb(65, 115, 89);
     border-radius: 11px;
     text-decoration: none;
-    width: 150px;
+    width: 120px;
     text-align: center;
     line-height: 3rem;
 }
 
-a:hover {
+.nav-btn:hover {
     background-color: rgba(65, 115, 89, 0.8);
 }
 
-.bean-info-container {
+#bean-info-container {
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.8);
@@ -88,13 +99,31 @@ a:hover {
     width: 20%;
 }
 
-.footer-block {
-    background-color: rgb(122, 161, 129);
-}
-
-.bean-info-container, .footer-block {
+#bean-info-container {
     margin: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+#footer-block {
+    display: flex;
+    height: 200px;
+    background-color: rgba(20, 70, 50, 1);
+}
+
+#footer-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 20px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.footer-btn {
+    width: 150px;
+    line-height: 2rem;
+    text-align: center;
+    text-decoration: none;
 }
