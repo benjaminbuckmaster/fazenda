@@ -9,17 +9,30 @@
 
     <title>LSC GBM</title>
 </head>
-<header>
-    <h1 href="{% url 'home' %}">LSC Green Bean Manager</h1>
-</header>
 <body>
+    <header>
+        <nav class="navbar">
+            <div id="nav-container">
+                <div id="logo-and-name">
+                    <img id="header-logo" src="{% static 'img/lsc-logo-light.png' %}" alt="Luckie Street Coffee Logo">
+                    <p><h1>Fazenda</h1></p>
+                </div>
+                <div id="nav-items">
+                    <a href="{% url 'bean-information' %}">View Beans</a>
+                    <a href="{% url 'stock-management' %}">Manage Stock</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
     {% block content %}{% endblock content %}
+
+    <footer>
+        <div class="footer-block">
+            <p><a href="{% url 'home' %}" class="footer-item">Go Home</a></p>
+        </div>
+    </footer>
 </body>
-<footer>
-    <div class="footer-block">
-        <a href="{% url 'home' %}" class="footer-item">Go Home</a>
-    </div>
-</footer>
 </html>
 
 

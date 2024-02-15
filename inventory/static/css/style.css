@@ -6,20 +6,66 @@ html {
 }
 
 body {
+    margin: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family: 'Outfit', sans-serif;
     background-color: #236847;
-    margin: 3%;
 }
 
 h1 {
-    color: rgb(216, 255, 223);
+    color: rgb(255, 255, 255);
+    font-size: 2rem;
 }
 
 h2 {
-    color: rgb(38, 255, 0);
+    color: rgb(184, 216, 177);
+}
+
+.navbar {
+    display: flex;
+    background-color: rgb(20, 69, 44);
+    height: 100px;
+}
+
+#nav-container {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#logo-and-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+}
+
+#header-logo {
+    width: 200px;
+}
+
+#nav-items {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    justify-content: space-around;
+}
+
+a {
+    color: white;
+    background-color: rgb(65, 115, 89);
+    border-radius: 11px;
+    text-decoration: none;
+    width: 150px;
+    text-align: center;
+    line-height: 3rem;
+}
+
+a:hover {
+    background-color: rgba(65, 115, 89, 0.8);
 }
 
 .bean-info-container {
