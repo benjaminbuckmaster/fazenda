@@ -56,24 +56,27 @@ a {
 #logo-and-name {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 40%;
+    width: auto;
 }
 
 #header-logo {
     width: 200px;
 }
 
+#name {
+    margin-left: 10px;
+}
+
 #nav-items {
     display: flex;
     align-items: center;
-    width: 30%;
-    justify-content: space-around;
+    width: auto;
 }
 
 .nav-btn {
     color: white;
     background-color: rgb(65, 115, 89);
+    margin: 5px;
     border-radius: 11px;
     text-decoration: none;
     width: 120px;
