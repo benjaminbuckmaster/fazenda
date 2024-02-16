@@ -11,11 +11,9 @@ class Bean(models.Model):
     reorder_trigger = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     reorder_qty = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
 
-
     # override string representation for developing purposes
     def __str__(self) -> str:
         return f"{self.name}"
-
 
 class StockEntry(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=True) # auto_now_add set to true for creation date
@@ -23,39 +21,32 @@ class StockEntry(models.Model):
     qty_added = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     qty_used = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
 
-
     def __str__(self) -> str:
         return f"{self.date} {self.bean.name} ({self.qty_added}, {self.qty_used})"
-    
 
     class Meta:
         verbose_name = "Stock Entry"
         verbose_name_plural = "Stock Entries"
-    
+        unique_together = ('bean', 'date')
 
     @property
     def qty_total(self):
         return self.qty_added - (self.qty_used or 0)
 
-
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         update_stock_totals(self.bean)
-
 
 class StockOffset(models.Model):
     bean = models.OneToOneField(Bean, on_delete=models.CASCADE, related_name='stock_offset')
     total_offset = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 
-
     def __str__(self) -> str:
         return f"{self.bean.name} Stock Offset"
-    
 
     class Meta:
         verbose_name = "Stock Offset"
         verbose_name_plural = "Stock Offsets"
-
 
 class StockTotal(models.Model):
     bean = models.OneToOneField(Bean, on_delete=models.CASCADE, related_name='stock_total')
@@ -64,7 +55,6 @@ class StockTotal(models.Model):
     def __str__(self) -> str:
         return f"{self.bean.name} Stock Total"
     
-
     class Meta:
         verbose_name = "Stock Total"
         verbose_name_plural = "Stock Totals"
@@ -81,7 +71,6 @@ def update_stock_totals(bean):
     stock_total, created = StockTotal.objects.get_or_create(bean=bean)
     stock_total.total_quantity = total_quantity
     stock_total.save()
-
 
 @receiver(post_save, sender=StockEntry)
 def update_stock_totals_on_stock_entry_save(sender, instance, **kwargs):
