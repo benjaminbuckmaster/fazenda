@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-block">
+    <h2>New Stock Entry for {{ bean.name }}</h2>
+    <p>{{ pk }}</p>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Bean</th>
+                    <th>Quantity Used</th>
+                    <th>Quantity Added</th>
+                </tr>
+                <tr>
+                    <td>{{form.bean}}</td>
+                    <td>{{form.qty_used}}</td>
+                    <td>{{form.qty_added}}</td>
+                </tr>
+            </table>
+        </div>
+        <button name="save">Save</button>
+    </form>
+</div>
+
+{% endblock content %}

@@ -44,6 +44,7 @@ a {
     display: flex;
     background-color: rgb(20, 69, 44);
     height: 100px;
+    box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.2);
 }
 
 #nav-container {
@@ -79,13 +80,25 @@ a {
     margin: 5px;
     border-radius: 11px;
     text-decoration: none;
-    width: 120px;
+    padding-left: 10px;
+    padding-right: 10px;
     text-align: center;
     line-height: 3rem;
 }
 
 .nav-btn:hover {
     background-color: rgba(65, 115, 89, 0.8);
+}
+
+.table-btn {
+    border: 1px solid rgb(65, 115, 89);
+    border-radius: 8px;
+    padding: 5px;
+    color: black;
+}
+
+#melody {
+    color: red;
 }
 
 .table-container {
@@ -97,6 +110,7 @@ a {
     padding-left: 40px;
     padding-right: 40px;
     margin-bottom: 40px;
+    box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.1);
 }
 
 tr {

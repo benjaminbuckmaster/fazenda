@@ -13,6 +13,7 @@
             <tr>
                 <td>{{stock_total.bean.name}}</td>
                 <td>{{stock_total.total_quantity}} kg</td>
+                <td><a class="table-btn" href="{% url "stock-entry" stock_total.bean.id %}">New Entry</a></td>
             </tr>
             {% endfor %}
         </table>
