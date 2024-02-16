@@ -8,12 +8,17 @@ html {
 }
 
 body {
+    min-height: 100vh;
     margin: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family: 'Outfit', sans-serif;
     background-color: #d2e0d9;
+}
+
+footer {
+    margin-top: auto;
 }
 
 h1 {

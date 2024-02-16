@@ -3,20 +3,19 @@
 {% block content %}
 <div class="content-block">
     <h2>New Stock Entry</h2>
-    <p>{{ pk }}</p>
     <form method="POST" action="">
         {% csrf_token %}
         <div class="form-container">
             <table>
                 <tr>
                     <th>Bean</th>
-                    <th>Quantity Used</th>
-                    <th>Quantity Added</th>
+                    <th>Quantity Used (kg)</th>
+                    <th>Quantity Added (kg)</th>
                 </tr>
                 <tr>
                     <td>{{form.bean}}</td>
-                    <td>{{form.qty_used}}</td>
                     <td>{{form.qty_added}}</td>
+                    <td>{{form.qty_used}}</td>
                 </tr>
             </table>
             <div class="form-btn-container">

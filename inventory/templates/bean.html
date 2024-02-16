@@ -2,9 +2,10 @@
 
 {% block content %}
 <div class="content-block">
-    <h2>Bean Information</h2>
+    <h2>Bean Management</h2>
     {% if beans %}
     <div class="table-container">
+        
         <table>
             <tr>
                 <th>Name</th>
@@ -22,6 +23,7 @@
                 <td>{{ bean.notes }}</td>
                 <td>{{ bean.reorder_trigger }} kg</td>
                 <td>{{ bean.reorder_qty }} kg</td>
+                <td><a class="table-btn" href="{% url "edit-bean" bean.id %}">Edit Details</a></td>
             </tr>
             {% endfor %}
         </table>

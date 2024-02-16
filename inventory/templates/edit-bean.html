@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-block">
+    <h2>Edit Bean Details</h2>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-container">
+            <table>
+                <tr><td><th>Name</th></td><td>{{ form.name }}</td></tr>
+                <tr><td><th>Origin</th></td><td>{{ form.origin }}</td></tr>
+                <tr><td><th>Supplier</th></td><td>{{ form.supplier }}</td></tr>
+                <tr><td><th>Notes</th></td><td>{{ form.notes }}</td></tr>
+                <tr><td><th>Reorder Trigger</th></td><td>{{ form.reorder_trigger }} kg</td></tr>
+                <tr><td><th>Reorder Quantity</th></td><td>{{ form.reorder_qty }} kg</td></tr>
+            </table>
+        </div>
+        <div class="form-btn-container">
+            <button class="form-btn" id="form-save" name="save">Save</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
