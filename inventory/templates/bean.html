@@ -5,24 +5,26 @@
     <h2>Bean Information</h2>
     {% if beans %}
     <div class="table-container">
-        <div class="table-header">
-            <h4>Name</h4>
-            <h4>Origin</h4>
-            <h4>Supplier</h4>
-            <h4>Notes</h4>
-            <h4>Reorder Trigger</h4>
-            <h4>Reorder Quantity</h4>
-        </div>
-        {% for bean in beans %}
-        <div class="table-row">
-            <p>{{ bean.name }}</p>
-            <p>{{ bean.origin }}</p>
-            <p>{{ bean.supplier }}</p>
-            <p>{{ bean.notes }}</p>
-            <p>{{ bean.reorder_trigger }} kg</p>
-            <p>{{ bean.reorder_qty }} kg</p>
-        </div>
-        {% endfor %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Origin</th>
+                <th>Supplier</th>
+                <th>Notes</th>
+                <th>Reorder Trigger</th>
+                <th>Reorder Quantity</th>
+            </tr>
+            {% for bean in beans %}
+            <tr>
+                <td>{{ bean.name }}</td>
+                <td>{{ bean.origin }}</td>
+                <td>{{ bean.supplier }}</td>
+                <td>{{ bean.notes }}</td>
+                <td>{{ bean.reorder_trigger }} kg</td>
+                <td>{{ bean.reorder_qty }} kg</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
     {% endif %}
 </div>

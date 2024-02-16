@@ -99,18 +99,12 @@ a {
     margin-bottom: 40px;
 }
 
-.table-row {
-    display: flex;
-    color: rgb(13, 56, 57);
-    font-weight: 400;
+tr {
+    line-height: 40px;
 }
 
-.table-header {
-    display: flex;
-}
-
-.table-row p, .table-header h4 {
-    flex: 1;
+th {
+    text-align: left;
 }
 
 #footer-block {
