@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Stock Offset</h2>
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-container">
+        <table>
+            <tr><td><th>Bean</th></td><td>{{ form.bean }}</td></tr>
+            <tr><td><th>Offset Amount</th></td><td>{{ form.total_offset }}</td></tr>
+        </table>
+    </div>
+    <div class="form-btn-container">
+        <button class="form-btn" id="form-save-btn" name="save">Save</button>
+        <button class="form-btn" id="form-cancel-btn" name="cancel">Cancel</button>
+    </div>
+</form>
+{% endblock content %}

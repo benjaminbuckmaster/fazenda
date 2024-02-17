@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Bean, StockEntry, StockOffset, StockTotal
-from .forms import StockEntryForm, BeanDetailsForm
+from .forms import StockEntryForm, BeanDetailsForm, StockOffsetForm
 
 def home(request):
 
@@ -16,7 +16,6 @@ def home(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, "Log in successful.")
             return redirect('home')
         else:
             messages.success(request, "Login error. Plase try again.")
@@ -47,8 +46,6 @@ def bean_information(request):
         messages.success(request, "You must be logged in to view this page.")
         return redirect('home')
     
-
-
 def stock_entry(request, pk):
     if request.user.is_authenticated:
         # define context dictionary
@@ -119,3 +116,35 @@ def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out.")
     return redirect('home')
+
+def stock_offset(request, pk):
+    if request.user.is_authenticated:
+        # initialise values to pass through to page
+        context = {}
+
+        # get the bean information from the database
+        offset = StockOffset.objects.filter(id=pk).get()
+
+        # initialise bean details form with the existing values
+        form = StockOffsetForm(initial={
+            "bean":offset.bean,
+            "total_offset":offset.total_offset,
+        })
+
+        # context to pass through
+        context['form'] = form
+        context['stock_offset'] = offset
+
+        if request.method == 'POST':
+            if 'save' in request.POST:
+                form = StockOffsetForm(request.POST, instance=offset)
+                form.save()
+                return redirect('stock-management')
+            elif 'cancel' in request.POST:
+                return redirect('stock-management')
+
+        # show page
+        return render(request, 'stock-offset.html', context)
+    else:
+        messages.success(request, "You must be logged in to view this page.")
+        return redirect('home')

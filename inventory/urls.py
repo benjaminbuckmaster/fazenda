@@ -8,4 +8,5 @@ urlpatterns = [
     path('stock-entry/<int:pk>', views.stock_entry, name='stock-entry'),
     path('edit-bean/<int:pk>', views.edit_bean, name='edit-bean'),
     path('logout/', views.logout_user, name='logout'),
+    path('stock-offset/<int:pk>', views.stock_offset, name='stock-offset'),
 ]
