@@ -1,8 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="content-block">
-    <h2>Homepage</h2>
+{% if user.is_authenticated %}
+<div>
+    <h2>Hello {{ user.username }}</h2>
     <p>Click on the buttons in the navigation bar access.</p>
 </div>
+{% else %}
+<div>
+    <h2>Login</h2>
+    <form method="POST" action="{% url 'home' %}">
+        {% csrf_token %}
+        <div>
+            <input type="text" name="username" placeholder="Username" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endif %}
 {% endblock content %}

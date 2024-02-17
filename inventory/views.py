@@ -1,77 +1,121 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from .models import Bean, StockEntry, StockOffset, StockTotal
 from .forms import StockEntryForm, BeanDetailsForm
 
 def home(request):
+
+    # check to see if logging in
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        # authenticate the user
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Log in successful.")
+            return redirect('home')
+        else:
+            messages.success(request, "Login error. Plase try again.")
+            return redirect('home')
+
     # show the homepage
     return render(request, 'home.html', {})
 
 def stock_management(request):
-    # get stock management information
-    stock_totals = StockTotal.objects.all()
+    if request.user.is_authenticated:
+        # get stock management information
+        stock_totals = StockTotal.objects.all()
 
-    # show the page and pass through stock information
-    return render(request, 'stock.html', {'stock_totals': stock_totals})
+        # show the page and pass through stock information
+        return render(request, 'stock.html', {'stock_totals': stock_totals})
+    else:
+        messages.success(request, "You must be logged in to view this page.")
+        return redirect('home')
 
 def bean_information(request):
-    # get the bean information from the database
-    beans = Bean.objects.all()
+    if request.user.is_authenticated:
+        # get the bean information from the database
+        beans = Bean.objects.all()
 
-    # shows bean information and passes through bean information
-    return render(request, 'bean.html', {'beans':beans})
+        # shows bean information and passes through bean information
+        return render(request, 'bean.html', {'beans':beans})
+    else:
+        messages.success(request, "You must be logged in to view this page.")
+        return redirect('home')
+    
+
 
 def stock_entry(request, pk):
-    # define context dictionary
-    context = {}
+    if request.user.is_authenticated:
+        # define context dictionary
+        context = {}
 
-    # initialise stock entry form with the bean chosen
-    form = StockEntryForm(initial={'bean': pk})
+        # initialise stock entry form with the bean chosen
+        form = StockEntryForm(initial={'bean': pk})
 
-    # get the bean information from the database
-    bean = Bean.objects.filter(id=pk).get()
+        # get the bean information from the database
+        bean = Bean.objects.filter(id=pk).get()
 
-    # context to pass through
-    context['pk'] = pk
-    context['form'] = form
-    context['bean'] = bean
+        # context to pass through
+        context['pk'] = pk
+        context['form'] = form
+        context['bean'] = bean
 
-    if request.method == 'POST':
-        # if the save button was pressed
-        if 'save' in request.POST:
-            form = StockEntryForm(request.POST)
-            form.save()
+        if request.method == 'POST':
+            if 'save' in request.POST:
+                form = StockEntryForm(request.POST)
+                form.save()
+            elif 'cancel' in request.POST:
+                return redirect('stock-management')
 
-    # show page
-    return render(request, 'stock-entry.html', context)
+        # show page
+        return render(request, 'stock-entry.html', context)
+    else:
+        messages.success(request, "You must be logged in to view this page.")
+        return redirect('home')
 
 def edit_bean(request, pk):
-    # initialise values to pass through to page
-    context = {}
+    if request.user.is_authenticated:
+        # initialise values to pass through to page
+        context = {}
 
-    # get the bean information from the database
-    bean = Bean.objects.filter(id=pk).get()
+        # get the bean information from the database
+        bean = Bean.objects.filter(id=pk).get()
 
-    # initialise bean details form with the existing values
-    form = BeanDetailsForm(initial={
-        "name":bean.name,
-        "origin":bean.origin,
-        "supplier":bean.supplier,
-        "notes":bean.notes,
-        "reorder_trigger":bean.reorder_trigger,
-        "reorder_qty":bean.reorder_qty,
-    })
+        # initialise bean details form with the existing values
+        form = BeanDetailsForm(initial={
+            "name":bean.name,
+            "origin":bean.origin,
+            "supplier":bean.supplier,
+            "notes":bean.notes,
+            "reorder_trigger":bean.reorder_trigger,
+            "reorder_qty":bean.reorder_qty,
+        })
 
-    # context to pass through
-    context['pk'] = pk
-    context['form'] = form
-    context['bean'] = bean
+        # context to pass through
+        context['pk'] = pk
+        context['form'] = form
+        context['bean'] = bean
 
-    if request.method == 'POST':
-        # if the save button was pressed
-        if 'save' in request.POST:
-            form = BeanDetailsForm(request.POST, instance=bean)
-            form.save()
-            return redirect('bean-information')
+        if request.method == 'POST':
+            if 'save' in request.POST:
+                form = BeanDetailsForm(request.POST, instance=bean)
+                form.save()
+                return redirect('bean-information')
+            elif 'cancel' in request.POST:
+                return redirect('bean-information')
+        
+        # show page
+        return render(request, 'edit-bean.html', context)
+    else:
+        messages.success(request, "You must be logged in to view this page.")
+        return redirect('home')
     
-    # show page
-    return render(request, 'edit-bean.html', context)
+def logout_user(request):
+    logout(request)
+    messages.success(request, "You have been logged out.")
+    return redirect('home')

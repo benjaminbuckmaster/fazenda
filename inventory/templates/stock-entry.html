@@ -1,28 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="content-block">
-    <h2>New Stock Entry</h2>
-    <form method="POST" action="">
-        {% csrf_token %}
-        <div class="form-container">
-            <table>
-                <tr>
-                    <th>Bean</th>
-                    <th>Quantity Used (kg)</th>
-                    <th>Quantity Added (kg)</th>
-                </tr>
-                <tr>
-                    <td>{{form.bean}}</td>
-                    <td>{{form.qty_added}}</td>
-                    <td>{{form.qty_used}}</td>
-                </tr>
-            </table>
-            <div class="form-btn-container">
-                <button class="form-btn" id="form-save" name="save">Save</button>
-            </div>
+<h2>New Stock Entry</h2>
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-container">
+        <table>
+            <tr>
+                <th>Bean</th>
+                <th>Quantity Used (kg)</th>
+                <th>Quantity Added (kg)</th>
+            </tr>
+            <tr>
+                <td>{{form.bean}}</td>
+                <td>{{form.qty_added}}</td>
+                <td>{{form.qty_used}}</td>
+            </tr>
+        </table>
+        <div class="form-btn-container">
+            <button class="form-btn" id="form-save-btn" name="save">Save</button>
+            <button class="form-btn" id="form-cancel-btn" name="cancel">Cancel</button>
         </div>
-    </form>
-</div>
-
+    </div>
+</form>
 {% endblock content %}

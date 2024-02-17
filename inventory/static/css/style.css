@@ -44,6 +44,14 @@ ul {
     padding-inline-start: 0;
 }
 
+.alert {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(255, 215, 123);
+    border-radius: 5px;
+}
+
 .content-block {
     display: flex;
     flex-direction: column;
@@ -119,8 +127,11 @@ ul {
     justify-content: end;
 }
 
-#form-save {
+#form-save-btn {
     width: 20%;
+}
+#form-cancel-btn {
+    color: gainsboro;
 }
 
 .table-container, .form-container {

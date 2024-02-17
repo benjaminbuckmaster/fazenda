@@ -1,33 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="content-block">
-    <h2>Bean Management</h2>
-    {% if beans %}
-    <div class="table-container">
-        
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Origin</th>
-                <th>Supplier</th>
-                <th>Notes</th>
-                <th>Reorder Trigger</th>
-                <th>Reorder Quantity</th>
-            </tr>
-            {% for bean in beans %}
-            <tr>
-                <td>{{ bean.name }}</td>
-                <td>{{ bean.origin }}</td>
-                <td>{{ bean.supplier }}</td>
-                <td>{{ bean.notes }}</td>
-                <td>{{ bean.reorder_trigger }} kg</td>
-                <td>{{ bean.reorder_qty }} kg</td>
-                <td><a class="table-btn" href="{% url "edit-bean" bean.id %}">Edit Details</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-    {% endif %}
+<h2>Bean Management</h2>
+{% if beans %}
+<div class="table-container">
+    
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Origin</th>
+            <th>Supplier</th>
+            <th>Notes</th>
+            <th>Reorder Trigger</th>
+            <th>Reorder Quantity</th>
+        </tr>
+        {% for bean in beans %}
+        <tr>
+            <td>{{ bean.name }}</td>
+            <td>{{ bean.origin }}</td>
+            <td>{{ bean.supplier }}</td>
+            <td>{{ bean.notes }}</td>
+            <td>{{ bean.reorder_trigger }} kg</td>
+            <td>{{ bean.reorder_qty }} kg</td>
+            <td><a class="table-btn" href="{% url "edit-bean" bean.id %}">Edit Details</a></td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
+{% endif %}
 {% endblock content %}
