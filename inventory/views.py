@@ -66,6 +66,7 @@ def stock_entry(request, pk):
             if 'save' in request.POST:
                 form = StockEntryForm(request.POST)
                 form.save()
+                return redirect('stock-management')
             elif 'cancel' in request.POST:
                 return redirect('stock-management')
 

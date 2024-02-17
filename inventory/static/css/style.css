@@ -174,10 +174,7 @@ th, td {
     padding-right: 5px;
   }
 
-button,
-input,
-select,
-textarea {
+button, input, select, textarea {
     font-family: inherit;
     line-height: 30px;
     font-size: 1rem;
@@ -197,6 +194,17 @@ select {
 
 input {
     width: 90%;
+}
+
+button:focus, input:focus, select:focus, textarea:focus {
+    outline: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #footer-block {
