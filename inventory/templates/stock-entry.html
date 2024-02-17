@@ -2,6 +2,9 @@
 
 {% block content %}
 <h2>New Stock Entry</h2>
+<div class="page-info">
+    <p>Note: you can only enter one entry per day.</p>
+</div>
 <form method="POST" action="">
     {% csrf_token %}
     <div class="form-container">

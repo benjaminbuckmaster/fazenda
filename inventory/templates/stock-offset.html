@@ -2,12 +2,23 @@
 
 {% block content %}
 <h2>Edit Stock Offset</h2>
+<div class="page-info">
+    <p>This will add or subtract from the total stock amount.</p>
+    <p>For example, if Fazenda says you have 10kg but you have 12kg, enter an Offset Amount of 2kg.</p>
+    <p>This is to be used for accurately knowing how much you have on hand and will not affect previous stock entries.</p>
+</div>
 <form method="POST" action="">
     {% csrf_token %}
     <div class="form-container">
         <table>
-            <tr><td><th>Bean</th></td><td>{{ form.bean }}</td></tr>
-            <tr><td><th>Offset Amount</th></td><td>{{ form.total_offset }}</td></tr>
+            <tr>
+                <th>Bean</th>
+                <td>{{ form.bean }}</td>
+            </tr>
+            <tr>
+                <th>Offset Amount</th>
+                <td>{{ form.total_offset }} kg</td>
+            </tr>
         </table>
     </div>
     <div class="form-btn-container">

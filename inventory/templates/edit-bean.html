@@ -6,12 +6,30 @@
     {% csrf_token %}
     <div class="form-container">
         <table>
-            <tr><td><th>Name</th></td><td>{{ form.name }}</td></tr>
-            <tr><td><th>Origin</th></td><td>{{ form.origin }}</td></tr>
-            <tr><td><th>Supplier</th></td><td>{{ form.supplier }}</td></tr>
-            <tr><td><th>Notes</th></td><td>{{ form.notes }}</td></tr>
-            <tr><td><th>Reorder Trigger</th></td><td>{{ form.reorder_trigger }} kg</td></tr>
-            <tr><td><th>Reorder Quantity</th></td><td>{{ form.reorder_qty }} kg</td></tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ form.name }}</td>
+            </tr>
+            <tr>
+                <th>Origin</th>
+                <td>{{ form.origin }}</td>
+            </tr>
+            <tr>
+                <th>Supplier</th>
+                <td>{{ form.supplier }}</td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ form.notes }}</td>
+            </tr>
+            <tr>
+                <th>Reorder Trigger</th>
+                <td>{{ form.reorder_trigger }} kg</td>
+            </tr>
+            <tr>
+                <th>Reorder Quantity</th>
+                <td>{{ form.reorder_qty }} kg</td>
+            </tr>
         </table>
     </div>
     <div class="form-btn-container">
