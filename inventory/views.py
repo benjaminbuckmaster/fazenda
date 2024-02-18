@@ -46,16 +46,17 @@ def bean_information(request):
         messages.success(request, "You must be logged in to view this page.")
         return redirect('home')
     
-def stock_entry(request, pk):
+def stock_entry(request, pk=None):
     if request.user.is_authenticated:
         # define context dictionary
         context = {}
 
-        # initialise stock entry form with the bean chosen
-        form = StockEntryForm(initial={'bean': pk})
+        # initialise stock entry form with the bean chosen if 'pk' is provided
+        form_initial = {'bean': pk} if pk else None
+        form = StockEntryForm(initial=form_initial)
 
-        # get the bean information from the database
-        bean = Bean.objects.filter(id=pk).get()
+        # get the bean information from the database if 'pk' is provided
+        bean = Bean.objects.filter(id=pk).first() if pk else None
 
         # context to pass through
         context['pk'] = pk
@@ -65,8 +66,9 @@ def stock_entry(request, pk):
         if request.method == 'POST':
             if 'save' in request.POST:
                 form = StockEntryForm(request.POST)
-                form.save()
-                return redirect('stock-management')
+                if form.is_valid():
+                    form.save()
+                    return redirect('stock-management')
             elif 'cancel' in request.POST:
                 return redirect('stock-management')
 
@@ -102,8 +104,9 @@ def edit_bean(request, pk):
         if request.method == 'POST':
             if 'save' in request.POST:
                 form = BeanDetailsForm(request.POST, instance=bean)
-                form.save()
-                return redirect('bean-information')
+                if form.is_valid():
+                    form.save()
+                    return redirect('bean-information')
             elif 'cancel' in request.POST:
                 return redirect('bean-information')
         
@@ -139,8 +142,9 @@ def stock_offset(request, pk):
         if request.method == 'POST':
             if 'save' in request.POST:
                 form = StockOffsetForm(request.POST, instance=offset)
-                form.save()
-                return redirect('stock-management')
+                if form.is_valid():
+                    form.save()
+                    return redirect('stock-management')
             elif 'cancel' in request.POST:
                 return redirect('stock-management')
 
@@ -149,3 +153,4 @@ def stock_offset(request, pk):
     else:
         messages.success(request, "You must be logged in to view this page.")
         return redirect('home')
+    
