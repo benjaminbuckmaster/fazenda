@@ -1,5 +1,6 @@
+from datetime import date
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 
@@ -16,7 +17,7 @@ class Bean(models.Model):
         return f"{self.name}"
 
 class StockEntry(models.Model):
-    date = models.DateField(auto_now=False, auto_now_add=True) # auto_now_add set to true for creation date
+    date = models.DateField(default=date.today, editable=True) # auto_now_add set to true for creation date
     bean = models.ForeignKey("Bean", on_delete=models.CASCADE)
     qty_added = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     qty_used = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
@@ -78,4 +79,8 @@ def update_stock_totals_on_stock_entry_save(sender, instance, **kwargs):
 
 @receiver(post_save, sender=StockOffset)
 def update_stock_totals_on_stock_offset_save(sender, instance, **kwargs):
+    update_stock_totals(instance.bean)
+
+@receiver(post_delete, sender=StockEntry)
+def update_stock_totals_on_stock_entry_delete(sender, instance, **kwargs):
     update_stock_totals(instance.bean)

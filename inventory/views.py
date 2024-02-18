@@ -27,7 +27,7 @@ def home(request):
 def stock_management(request):
     if request.user.is_authenticated:
         # get stock management information
-        stock_totals = StockTotal.objects.all()
+        stock_totals = StockTotal.objects.all().order_by('bean__name') # order by name descending
 
         # show the page and pass through stock information
         return render(request, 'stock.html', {'stock_totals': stock_totals})
