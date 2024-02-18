@@ -46,7 +46,7 @@ def bean_information(request):
         messages.success(request, "You must be logged in to view this page.")
         return redirect('home')
     
-def stock_entry(request, pk=None):
+def new_stock_entry(request, pk=None):
     if request.user.is_authenticated:
         # define context dictionary
         context = {}
@@ -73,7 +73,7 @@ def stock_entry(request, pk=None):
                 return redirect('stock-management')
 
         # show page
-        return render(request, 'stock-entry.html', context)
+        return render(request, 'new-stock-entry.html', context)
     else:
         messages.success(request, "You must be logged in to view this page.")
         return redirect('home')
@@ -154,3 +154,64 @@ def stock_offset(request, pk):
         messages.success(request, "You must be logged in to view this page.")
         return redirect('home')
     
+def view_stock_entries(request, pk=None):
+    if request.user.is_authenticated:
+        # initialise values to pass through to page
+        context = {}
+
+        # get entries if pk else get all
+        if pk:
+            entries = StockEntry.objects.filter(bean=pk).all().order_by('-date') # order by date descending
+        else:
+            entries = StockEntry.objects.all().order_by('-date') # order by date descending
+
+        # define context to pass through
+        context['entries'] = entries
+
+        # show page
+        return render(request, 'stock-entries.html', context)
+
+    else:
+        messages.success(request, "You must be logged in to view this page.")
+        return redirect('home')
+
+def edit_stock_entry(request, id):
+    if request.user.is_authenticated:
+        # initialise values to pass through to page
+        context = {}
+
+        # get stock entry with id
+        entry = StockEntry.objects.filter(id=id).get()
+
+        # get bean
+        bean = Bean.objects.filter(pk=entry.bean.id).get()
+
+        # initialise stock entry form with the bean chosen if 'pk' is provided
+        form_initial = {
+            'bean': bean,
+            'qty_added': entry.qty_added,
+            'qty_used': entry.qty_used,
+            }
+        form = StockEntryForm(initial=form_initial)
+
+        # define context to pass through
+        context['entry'] = entry
+        context['form'] = form
+
+        if request.method == 'POST':
+            if 'save' in request.POST:
+                form = StockEntryForm(request.POST, instance=entry)
+                if form.is_valid():
+                    form.save()
+                    return redirect('stock-management')
+                else:
+                    messages.success(request, form.errors)
+            elif 'cancel' in request.POST:
+                return redirect('stock-management')
+
+        # show page
+        return render(request, 'edit-stock-entry.html', context)
+
+    else:
+        messages.success(request, "You must be logged in to view this page.")
+        return redirect('home')

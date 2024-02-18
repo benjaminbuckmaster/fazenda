@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Entry</h2>
+<div class="page-info">
+</div>
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-container">
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Bean</th>
+                <th>Quantity Added (kg)</th>
+                <th>Quantity Used (kg)</th>
+            </tr>
+            <tr>
+                <td>{{entry.date}}</td>
+                <td>{{form.bean}}</td>
+                <td>{{form.qty_added}}</td>
+                <td>{{form.qty_used}}</td>
+            </tr>
+        </table>
+        <div class="form-btn-container">
+            <button class="form-btn" id="form-save-btn" name="save">Save</button>
+            <button class="form-btn" id="form-cancel-btn" name="cancel">Cancel</button>
+        </div>
+    </div>
+</form>
+{% endblock content %}

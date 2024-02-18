@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Stock Entries</h2>
+<div class="page-info">
+    <p>Update if you need!</p>
+</div>
+<div class="table-container">
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Bean</th>
+            <th>Quantity Added (kg)</th>
+            <th>Quantity Used (kg)</th>
+        </tr>
+        {% for entry in entries %}
+            <tr>
+                <td>{{entry.date}}</td>
+                <td>{{entry.bean}}</td>
+                <td>{{entry.qty_added}}</td>
+                <td>{{entry.qty_used}}</td>
+                <td><a class="table-btn" href="{% url "edit-stock-entry" id=entry.id %}">Edit Entry</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+<a class="form-btn" href="{% url "stock-management" %}">Back</a>
+{% endblock content %}

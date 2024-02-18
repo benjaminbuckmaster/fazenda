@@ -5,6 +5,9 @@
 <div class="page-info">
     <p>Here you can add stock entries and manage stock offsets.</p>
 </div>
+<div>
+    <a class="table-btn" href="{% url "stock-entries"%}">View Entries</a></td>
+</div>
 <div class="table-container">
     <table>
         <tr>
@@ -17,9 +20,9 @@
             <td>{{stock_total.total_quantity}} kg</td>
             <td>
                 {% if stock_total.bean.id %}
-                    <a class="table-btn" href="{% url "stock-entry-detail" pk=stock_total.bean.id %}">New Entry</a></td>
+                    <td><a class="table-btn" href="{% url "new-stock-entry-detail" pk=stock_total.bean.id %}">New Entry</a></td>
                 {% else %}
-                    <a class="table-btn" href="{% url "stock-entry" %}">New Entry</a></td>
+                    <td><a class="table-btn" href="{% url "new-stock-entry" %}">New Entry</a></td>
                 {% endif %}
             <td><a class="table-btn" href="{% url "stock-offset" stock_total.bean.id %}">Manage Offset</a></td>
         </tr>
