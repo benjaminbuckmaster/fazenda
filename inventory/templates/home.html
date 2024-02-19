@@ -7,6 +7,9 @@
     <p>Click on the buttons in the navigation bar access.</p>
 </div>
 {% else %}
+<div class="page-info">
+    <p>Please log in to access Fazenda.</p>
+</div>
 <div>
     <h2>Login</h2>
     <form method="POST" action="{% url 'home' %}">

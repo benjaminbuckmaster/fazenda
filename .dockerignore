@@ -1,0 +1,9 @@
+fly.toml
+.git/
+*.sqlite3
+
+/venv
+venv/
+.env
+/env
+env/
