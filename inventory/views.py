@@ -4,8 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Bean, StockEntry, StockOffset, StockTotal
 from .forms import StockEntryForm, BeanDetailsForm, StockOffsetForm
+from .todoist_controller import TodoistController
 
 def home(request):
+    # initialise context to pass through to page
+    context = {}
 
     # check to see if logging in
     if request.method == 'POST':
@@ -21,9 +24,18 @@ def home(request):
         else:
             messages.error(request, "Login error. Plase try again.")
             return redirect('home')
+        
+    todoist = TodoistController()
+
+    todoist_today = todoist.get_today()
+    todoist_overdue = todoist.get_overdue()
+
+    # add context to pass through
+    context['todoist_today'] = todoist_today
+    context['todoist_overdue'] = todoist_overdue
 
     # show the homepage
-    return render(request, 'home.html', {})
+    return render(request, 'home.html', context)
 
 def stock_management(request):
     if request.user.is_authenticated:

@@ -2,10 +2,30 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<div>
+<div class="welcome">
     <h2>Hello {{ user.username }}</h2>
-    <p>Click on the buttons in the navigation bar access.</p>
 </div>
+<div class="dashboard-container">
+    <div class="dashitem1">
+        <h1>Due Today</h1>
+        <ul class="todoist-tasks">
+            {% for task in todoist_today %}
+            <li><a href="{{ task.url }}" target="_blank">{{ task.content }}</a></li>
+            {% endfor %}
+        </ul>
+        {% if todoist_overdue %}
+        <h1>Overdue</h1>
+        <ul class="todoist-tasks">
+            {% for task in todoist_overdue %}
+            <li><a href="{{ task.url }}" target="_blank">{{ task.content }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <a href="https://app.todoist.com/" target="_blank" class="nav-btn" id="todoist-link">View on Todoist</a>
+    </div>
+</div>
+
+
 {% else %}
 <div class="page-info">
     <p>Please log in to access Fazenda.</p>
