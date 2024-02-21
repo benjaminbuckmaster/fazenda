@@ -38,7 +38,7 @@ def stock_management(request):
 def bean_information(request):
     if request.user.is_authenticated:
         # get the bean information from the database
-        beans = Bean.objects.all()
+        beans = Bean.objects.all().order_by('name')
 
         # shows bean information and passes through bean information
         return render(request, 'bean.html', {'beans':beans})
