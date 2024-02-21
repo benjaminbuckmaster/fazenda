@@ -57,11 +57,27 @@ ul {
     padding-inline-start: 0;
 }
 
-.alert {
+.message-warning {
     text-align: center;
     padding: 10px;
     margin: 10px;
     background-color: rgb(255, 215, 123);
+    border-radius: 5px;
+}
+
+.message-error {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(255, 132, 123);
+    border-radius: 5px;
+}
+
+.message-success {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(123, 255, 132);
     border-radius: 5px;
 }
 

@@ -13,6 +13,7 @@
 <body>
     <div id="width-too-narrow">
         <div class="middle-of-screen">
+            <img id="header-logo" src="{% static 'img/lsc-logo-light.png' %}" alt="Luckie Street Coffee Logo">
             <h1>I need some space here</h1>
             <p>This app is not designed for mobile yet.</p>
         </div>
@@ -37,12 +38,14 @@
     
     <div class="content-block">
         {% if messages %}
-            {% for message in messages %}
-              <div class="alert" role="alert">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
+            <ul class="messages-error">
+                {% for message in messages %}
+                    {% if message.tags %}
+                    <li class="message-{{ message.tags }}">{{ message }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
         {% block content %}{% endblock content %}
     </div>
 

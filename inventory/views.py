@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -18,7 +19,7 @@ def home(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.success(request, "Login error. Plase try again.")
+            messages.error(request, "Login error. Plase try again.")
             return redirect('home')
 
     # show the homepage
@@ -32,7 +33,7 @@ def stock_management(request):
         # show the page and pass through stock information
         return render(request, 'stock.html', {'stock_totals': stock_totals})
     else:
-        messages.success(request, "You must be logged in to view this page.")
+        messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
 
 def bean_information(request):
@@ -43,7 +44,7 @@ def bean_information(request):
         # shows bean information and passes through bean information
         return render(request, 'bean.html', {'beans':beans})
     else:
-        messages.success(request, "You must be logged in to view this page.")
+        messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
     
 def new_stock_entry(request, pk=None):
@@ -66,6 +67,10 @@ def new_stock_entry(request, pk=None):
         if request.method == 'POST':
             if 'save' in request.POST:
                 form = StockEntryForm(request.POST)
+                # check if an entry already exists for the current day
+                if StockEntry.objects.filter(date=timezone.now().date()).exists():
+                    messages.error(request, "An entry for today already exists.")
+                    return redirect('stock-management')
                 if form.is_valid():
                     form.save()
                     return redirect('stock-management')
@@ -75,7 +80,7 @@ def new_stock_entry(request, pk=None):
         # show page
         return render(request, 'new-stock-entry.html', context)
     else:
-        messages.success(request, "You must be logged in to view this page.")
+        messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
 
 def edit_bean(request, pk):
@@ -113,7 +118,7 @@ def edit_bean(request, pk):
         # show page
         return render(request, 'edit-bean.html', context)
     else:
-        messages.success(request, "You must be logged in to view this page.")
+        messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
     
 def logout_user(request):
@@ -151,7 +156,7 @@ def stock_offset(request, pk):
         # show page
         return render(request, 'stock-offset.html', context)
     else:
-        messages.success(request, "You must be logged in to view this page.")
+        messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
     
 def view_stock_entries(request, pk=None):
@@ -172,7 +177,7 @@ def view_stock_entries(request, pk=None):
         return render(request, 'stock-entries.html', context)
 
     else:
-        messages.success(request, "You must be logged in to view this page.")
+        messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
 
 def edit_stock_entry(request, id):
@@ -205,7 +210,7 @@ def edit_stock_entry(request, id):
                     form.save()
                     return redirect('stock-management')
                 else:
-                    messages.success(request, form.errors)
+                    messages.error(request, form.errors)
             elif 'cancel' in request.POST:
                 return redirect('stock-management')
 
@@ -213,5 +218,5 @@ def edit_stock_entry(request, id):
         return render(request, 'edit-stock-entry.html', context)
 
     else:
-        messages.success(request, "You must be logged in to view this page.")
+        messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
