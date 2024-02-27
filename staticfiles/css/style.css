@@ -3,7 +3,7 @@
 html {
     font-size: 16px;
     font-weight: 100;
-    color: rgb(43, 43, 43);
+    color: rgb(17, 17, 17);
     font-weight: 200;
 }
 
@@ -16,7 +16,7 @@ html {
     left:0;
     width: 100%;
     height: 100%;
-    background-color: rgb(20, 69, 44);
+    background-color: #886042;
 }
 
 body {
@@ -26,7 +26,7 @@ body {
     flex-direction: column;
     justify-content: center;
     font-family: 'Outfit', sans-serif;
-    background-color: #d2e0d9;
+    /* background-color: #d2e0d9; */
 }
 
 footer {
@@ -34,12 +34,12 @@ footer {
 }
 
 h1 {
-    color: rgb(218, 231, 221);
+    color: rgb(255, 255, 255);
     font-size: 2rem;
 }
 
 h2 {
-    color: rgb(54, 104, 57);
+    color: #886042;
     margin-bottom: 0px;
 }
 
@@ -48,7 +48,7 @@ h4 {
 }
 
 a {
-    color: rgb(184, 184, 184);
+    color: rgb(17, 17, 17);
     text-decoration: none;
 }
 
@@ -57,11 +57,27 @@ ul {
     padding-inline-start: 0;
 }
 
-.alert {
+.message-warning {
     text-align: center;
     padding: 10px;
     margin: 10px;
     background-color: rgb(255, 215, 123);
+    border-radius: 5px;
+}
+
+.message-error {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(255, 132, 123);
+    border-radius: 5px;
+}
+
+.message-success {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(123, 255, 132);
     border-radius: 5px;
 }
 
@@ -74,7 +90,7 @@ ul {
 
 .navbar {
     display: flex;
-    background-color: rgb(20, 69, 44);
+    background-color: #886042;
     height: 100px;
     box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.2);
 }
@@ -118,9 +134,12 @@ ul {
     width: auto;
 }
 
-.nav-btn, .form-btn {
+.nav-btn {
     color: white;
-    background-color: rgb(65, 115, 89);
+}
+
+.nav-btn, .form-btn, .body-btn {
+    background-color: rgba(255,255,255,0.1);
     cursor:pointer;
     border: 0px;
     margin: 5px;
@@ -131,12 +150,12 @@ ul {
     box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1);
 }
 
-.nav-btn:hover, .form-btn:hover {
-    background-color: rgba(65, 115, 89, 0.8);
+.nav-btn:hover, .form-btn:hover, .body-btn:hover {
+    background-color: rgba(0,0,0, 0.1);
 }
 
 .table-btn {
-    border: 1px solid rgb(65, 115, 89);
+    border: 1px solid rgba(0, 0, 0,0.2);
     border-radius: 8px;
     padding: 5px;
     color: black;
@@ -160,7 +179,7 @@ ul {
 }
 
 #new-entry-btn {
-    background-color: rgba(235, 255, 248, 0.5);
+    background-color: rgba(255, 244, 231, 0.5);
 }
 
 .table-container, .form-container {
@@ -233,10 +252,45 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.dashboard-container {
+    display: flex;
+    margin-top: 20px;
+    /* border: 1px solid white; */
+    width: 80%;
+}
+
+.dashboard-container h1 {
+    color: rgb(17, 17, 17);
+    margin: 0px;
+    width: auto;
+}
+
+.dashitem1 {
+    padding: 30px;
+    box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1);
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 10px;
+}
+
+.todoist-tasks {
+    list-style: initial;
+    padding-inline-start: initial;
+}
+
+.todoist-tasks p {
+    color: rgb(0, 0, 0);
+    margin: 0px;
+    line-height: 1rem;
+}
+
+#todoist-link {
+    margin: 20px;
+}
+
 #footer-block {
     display: flex;
     height: 200px;
-    background-color: rgba(20, 70, 50, 1);
+    background-color: #886042;
 }
 
 #footer-container {

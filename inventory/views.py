@@ -80,7 +80,7 @@ def new_stock_entry(request, pk=None):
             if 'save' in request.POST:
                 form = StockEntryForm(request.POST)
                 # check if an entry already exists for the current day
-                if StockEntry.objects.filter(date=timezone.now().date()).exists():
+                if StockEntry.objects.filter(date=timezone.now().date(), bean=bean).exists():
                     messages.error(request, "An entry for today already exists.")
                     return redirect('stock-management')
                 if form.is_valid():
