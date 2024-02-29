@@ -16,17 +16,14 @@ html {
     left:0;
     width: 100%;
     height: 100%;
-    background-color: #886042;
 }
 
 body {
     min-height: 100vh;
     margin: 0px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     font-family: 'Outfit', sans-serif;
-    /* background-color: #d2e0d9; */
+    background-color: #eaeaea;
 }
 
 footer {
@@ -34,8 +31,9 @@ footer {
 }
 
 h1 {
-    color: rgb(255, 255, 255);
+    color: rgb(57, 57, 57);
     font-size: 2rem;
+    margin: 0px;
 }
 
 h2 {
@@ -84,15 +82,7 @@ ul {
 .content-block {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.navbar {
-    display: flex;
-    background-color: #886042;
-    height: 100px;
-    box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.2);
+    padding: 40px 80px;
 }
 
 .middle-of-screen {
@@ -107,41 +97,37 @@ ul {
     color: rgba(255, 255, 255, 0.5);
 }
 
-#nav-container {
-    padding: 20px;
-    width: 100%;
+nav {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    height: 100vh;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.2);
 }
 
-#logo-and-name {
+.main-logo {
     display: flex;
     align-items: center;
     width: auto;
-}
-
-#header-logo {
-    width: 200px;
 }
 
 #name {
-    margin-left: 10px;
+    margin: 20px;
 }
 
-#nav-items {
+#nav-list {
     display: flex;
+    flex-direction: column;
     align-items: center;
     width: auto;
+    border: 1px solid orange;
 }
 
-.nav-btn {
-    color: white;
-}
-
-.nav-btn, .form-btn, .body-btn {
+.nav-list li, .form-btn, .body-btn {
     background-color: rgba(255,255,255,0.1);
     cursor:pointer;
-    border: 0px;
     margin: 5px;
     border-radius: 11px;
     text-decoration: none;
@@ -150,15 +136,38 @@ ul {
     box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1);
 }
 
-.nav-btn:hover, .form-btn:hover, .body-btn:hover {
+.nav-list li {
+    color: rgb(69, 69, 69);
+    margin: 20px;
+}
+
+.login-info-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0px;
+    margin: 20px;
+}
+
+#logout-btn {
+    align-self: center;
+}
+
+.nav-list li:hover, .form-btn:hover, .body-btn:hover {
     background-color: rgba(0,0,0, 0.1);
+}
+
+.page-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .table-btn {
     border: 1px solid rgba(0, 0, 0,0.2);
     border-radius: 8px;
     padding: 5px;
-    color: black;
+    color: rgb(22, 22, 22);
 }
 
 .table-btn:hover {
@@ -175,7 +184,7 @@ ul {
 }
 
 #form-cancel-btn {
-    color: gainsboro;
+    color: rgb(46, 46, 46);
 }
 
 #new-entry-btn {
@@ -266,7 +275,9 @@ input::-webkit-inner-spin-button {
 }
 
 .dashitem1 {
-    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
     box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1);
     background-color: rgba(255,255,255,0.3);
     border-radius: 10px;
@@ -274,7 +285,7 @@ input::-webkit-inner-spin-button {
 
 .todoist-tasks {
     list-style: initial;
-    padding-inline-start: initial;
+    padding-inline-start: 1em;
 }
 
 .todoist-tasks p {
@@ -283,21 +294,16 @@ input::-webkit-inner-spin-button {
     line-height: 1rem;
 }
 
-#todoist-link {
+/* #todoist-link {
     margin: 20px;
-}
+} */
 
-#footer-block {
+footer {
     display: flex;
     height: 200px;
-    background-color: #886042;
-}
-
-#footer-container {
-    display: flex;
+    /* background-color: #886042; */
     flex-direction: column;
     width: 100%;
-    margin: 20px;
     align-items: center;
     text-align: center;
 }
@@ -312,5 +318,9 @@ input::-webkit-inner-spin-button {
 @media only screen and (max-width: 1150px) {
     #width-too-narrow {
         display: block;
+    }
+
+    nav, .page-body {
+        display: none;
     }
   }

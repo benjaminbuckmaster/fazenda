@@ -6,59 +6,60 @@
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'fazenda_logo.png' %}"/>
 
     <title>LSC Fazenda</title>
 </head>
 <body>
     <div id="width-too-narrow">
         <div class="middle-of-screen">
-            <img id="header-logo" src="{% static 'img/lsc-logo-light.png' %}" alt="Luckie Street Coffee Logo">
+            {% comment %} <img id="header-logo" src="{% static 'img/lsc-logo-light.png' %}" alt="Luckie Street Coffee Logo"> {% endcomment %}
             <h1>I need some space here</h1>
             <p>This app is not designed for mobile yet.</p>
         </div>
     </div>
     <header>
-        <nav class="navbar">
-            <div id="nav-container">
-                <div id="logo-and-name">
-                    <a href="{% url 'home' %}"><img id="header-logo" src="{% static 'img/lsc-logo-light.png' %}" alt="Luckie Street Coffee Logo"></a>
-                    <p><h1 id="name">Fazenda</h1></p>
-                </div>
-                <div id="nav-items">
-                    {% if user.is_authenticated %}
-                    <a class="nav-btn" href="{% url 'bean-information' %}">Manage Beans</a>
-                    <a class="nav-btn" href="{% url 'stock-management' %}">Manage Stock</a>
-                    <a class="footer-btn" href="{% url 'logout' %}">Logout</a>
-                    {% endif %}
-                </div>
+        <nav>
+            <div class="main-logo">
+                {% comment %} <a href="{% url 'home' %}"><img id="main-logo" src="{% static 'img/lsc-logo-light.png' %}" alt="Luckie Street Coffee Logo"></a> {% endcomment %}
             </div>
+            <div class="app-title">
+                <a href="{% url 'home' %}"><h1 id="name">Fazenda</h1></a>
+            </div>
+            {% if user.is_authenticated %}
+            <ul class="nav-list">
+                <li><a href="{% url 'bean-information' %}">Manage Beans</a></li>
+                <li><a href="{% url 'stock-management' %}">Manage Stock</a></li>
+            </ul>
+            <div class="login-info-container">
+                <p>Logged in as {{ user.username }}</p>
+                <a id="logout-btn" href="{% url 'logout' %}">Logout</a>
+            </div>
+            {% endif %}
         </nav>
     </header>
     
-    <div class="content-block">
-        {% if messages %}
-            <ul class="messages-error">
-                {% for message in messages %}
-                    {% if message.tags %}
-                    <li class="message-{{ message.tags }}">{{ message }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        {% endif %}
-        {% block content %}{% endblock content %}
-    </div>
-
-    <footer>
-        <div id="footer-block">
-            <div id="footer-container">
-                <ul>
-                    <li><a class="footer-btn" href="http://www.luckiestreetcoffee.com" target="_blank">www.luckiestreetcoffee.com.au</a></li>
-                    <li><p>Benjamin Buckmaster 2024</p></li>
+    <div class="page-body">
+        <div class="content-block">
+            {% if messages %}
+                <ul class="messages-error">
+                    {% for message in messages %}
+                        {% if message.tags %}
+                        <li class="message-{{ message.tags }}">{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
-            </div>
+            {% endif %}
+            {% block content %}{% endblock content %}
         </div>
-    </footer>
+    
+        <footer>
+            <ul>
+                <li><a class="footer-btn" href="http://www.luckiestreetcoffee.com" target="_blank">www.luckiestreetcoffee.com.au</a></li>
+                <li>Benjamin Buckmaster 2024</li>
+            </ul>
+        </footer>
+    </div>
 </body>
 </html>
 
