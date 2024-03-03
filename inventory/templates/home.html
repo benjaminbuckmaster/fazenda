@@ -1,18 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 {% if user.is_authenticated %}
 <div class="welcome">
     <h2>Hello {{ user.username }}</h2>
 </div>
-<div class="dashboard-container">
-    <div class="dashitem1">
+<div class="dash-container">
+    <div class="dash-item" id="dash-item1">
         <h1>Due Today</h1>
+        {% if todoist_today %}
         <ul class="todoist-tasks">
             {% for task in todoist_today %}
             <li><a href="{{ task.url }}" target="_blank">{{ task.content }}</a></li>
             {% endfor %}
         </ul>
+        {% else %}
+        <p>No tasks due today</p>
+        {% endif %}
         {% if todoist_overdue %}
         <h1>Overdue</h1>
         <ul class="todoist-tasks">
@@ -21,7 +26,15 @@
             {% endfor %}
         </ul>
         {% endif %}
-        <a href="https://app.todoist.com/" target="_blank" class="body-btn" id="todoist-link">View on Todoist</a>
+        <a href="https://app.todoist.com/" target="_blank" class="body-btn" id="todoist-link">Go to Todoist</a>
+    </div>
+    <div class="dash-item" id="dash-item2">
+        <a href="https://luckie-street-coffee.myshopify.com/admin" target="_blank" id="shopify-link"><img id="shopify-logo" src="{% static 'img/shopify-logo.png' %}" alt="Shopify Logo"></a>
+        <a href="https://luckie-street-coffee.myshopify.com/admin" target="_blank" id="shopify-link"><h1>Shopify</h1>
+    </div>
+    <div class="dash-item" id="dash-item3">
+        <a href="https://mail.zoho.com.au/zm/#mail/folder/inbox" target="_blank" id="zoho-mail-link"><img id="zoho-mail-logo" src="{% static 'img/zoho-mail-logo.png' %}" alt="Zoho Mail Logo"></a>
+        <a href="https://mail.zoho.com.au/zm/#mail/folder/inbox" target="_blank" id="zoho-mail-link"><h1>Mail</h1>
     </div>
 </div>
 
@@ -30,7 +43,7 @@
 <div class="page-info">
     <p>Please log in to access Fazenda.</p>
 </div>
-<div>
+<div class="login-container">
     <h2>Login</h2>
     <form method="POST" action="{% url 'home' %}">
         {% csrf_token %}
@@ -40,7 +53,7 @@
         <div class="mb-3">
             <input type="password" name="password" placeholder="Password" required>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" class="form-btn">Login</button>
     </form>
 </div>
 {% endif %}

@@ -6,7 +6,7 @@
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'fazenda_logo.png' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
     <title>LSC Fazenda</title>
 </head>
@@ -20,8 +20,8 @@
     </div>
     <header>
         <nav>
-            <div class="main-logo">
-                {% comment %} <a href="{% url 'home' %}"><img id="main-logo" src="{% static 'img/lsc-logo-light.png' %}" alt="Luckie Street Coffee Logo"></a> {% endcomment %}
+            <div>
+                <a href="{% url 'home' %}"><img id="main-logo" src="{% static 'img/lsc-logo-dark.png' %}" alt="Luckie Street Coffee Logo"></a>
             </div>
             <div class="app-title">
                 <a href="{% url 'home' %}"><h1 id="name">Fazenda</h1></a>

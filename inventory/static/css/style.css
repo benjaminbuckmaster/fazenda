@@ -59,7 +59,7 @@ ul {
     text-align: center;
     padding: 10px;
     margin: 10px;
-    background-color: rgb(255, 215, 123);
+    background-color: rgb(206, 163, 61);
     border-radius: 5px;
 }
 
@@ -67,7 +67,7 @@ ul {
     text-align: center;
     padding: 10px;
     margin: 10px;
-    background-color: rgb(255, 132, 123);
+    background-color: rgb(208, 100, 92);
     border-radius: 5px;
 }
 
@@ -75,7 +75,7 @@ ul {
     text-align: center;
     padding: 10px;
     margin: 10px;
-    background-color: rgb(123, 255, 132);
+    background-color: rgb(77, 193, 84);
     border-radius: 5px;
 }
 
@@ -94,35 +94,50 @@ ul {
 }
 
 .middle-of-screen p {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgb(25, 25, 25);
 }
 
 nav {
     display: flex;
     flex-direction: column;
+    align-items: center;
     height: 100vh;
+    width: 200px;
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.2);
 }
 
-.main-logo {
-    display: flex;
-    align-items: center;
-    width: auto;
+.login-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+}
+
+form {
+    width: fit-content;
+}
+
+#main-logo {
+    width: 150px;
+    margin-top: 5px;
 }
 
 #name {
-    margin: 20px;
+    margin-bottom: 30px;
 }
 
-#nav-list {
+.nav-list {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: auto;
-    border: 1px solid orange;
+    margin: 0px;
 }
 
 .nav-list li, .form-btn, .body-btn {
@@ -138,7 +153,7 @@ nav {
 
 .nav-list li {
     color: rgb(69, 69, 69);
-    margin: 20px;
+    margin-bottom: 20px;
 }
 
 .login-info-container {
@@ -261,26 +276,46 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.dashboard-container {
+.dash-container {
     display: flex;
     margin-top: 20px;
-    /* border: 1px solid white; */
     width: 80%;
 }
 
-.dashboard-container h1 {
+.dash-container h1 {
     color: rgb(17, 17, 17);
     margin: 0px;
-    width: auto;
 }
 
-.dashitem1 {
+.dash-item {
     display: flex;
     flex-direction: column;
-    padding: 40px;
+    padding: 30px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    height: fit-content;
     box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1);
     background-color: rgba(255,255,255,0.3);
     border-radius: 10px;
+}
+
+#shopify-logo {
+    width: 60px;
+}
+
+#zoho-mail-logo {
+    width: 60px;
+    margin-bottom: 3px;
+}
+
+#dash-item2, #dash-item3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#dash-item2 h1, #dash-item3 h1 {
+    margin: 0px;
 }
 
 .todoist-tasks {
