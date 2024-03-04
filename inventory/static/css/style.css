@@ -123,13 +123,20 @@ form {
     width: fit-content;
 }
 
+.app-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #main-logo {
     width: 150px;
-    margin-top: 5px;
+    margin-top: 34px;
 }
 
 #name {
     margin-bottom: 30px;
+    font-size: 2.5rem;
 }
 
 .nav-list {
@@ -318,6 +325,7 @@ input::-webkit-inner-spin-button {
 
 #dash-item-todoist {
     flex-direction: column;
+    min-width: 250px;
 }
 
 #dash-link-todoist {
@@ -369,7 +377,17 @@ footer {
     /* text-decoration: none; */
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 897px) {
+    .dash-container {
+        flex-direction: column;
+    }
+
+    #dash-item-todoist {
+        width: fit-content;
+    }
+}
+
+@media only screen and (max-width: 800px) {
     #width-too-narrow {
         display: none;
     }
@@ -391,8 +409,10 @@ footer {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 40px;
-        height: 132px;
+        margin-top: 0px;
+        margin-left: 3%;
+        margin-right: 3%;
+        width: fit-content;
         padding-left: 10px;
     }
 
@@ -401,15 +421,15 @@ footer {
     }
     
     #main-logo {
-        width: 108px;
-        margin-top: 0px;
-        margin-bottom: 0;
+        width: 120px;
+        margin-top: 0;
+        margin-bottom: 10px;
     }
     
     #name {
         margin-bottom: 0;
         margin-top: 0;
-        font-size: 1.3rem;
+        font-size: 2rem;
     }
 
     .nav-list {
@@ -436,7 +456,7 @@ footer {
     }
 
     .nav-list {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .nav-list li {
@@ -454,4 +474,42 @@ footer {
         align-items: center;
         text-align: center;
     }
-  }
+}
+
+@media only screen and (max-width: 550px) {
+    #width-too-narrow {
+        display: none;
+    }
+
+    .nav-list {
+        flex-direction: column;
+    }
+
+    .app-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0px;
+        margin-left: 5px;
+        margin-right: 0;
+        width: fit-content;
+        padding-left: 10px;
+    }
+
+    .app-title a {
+        line-height: 18px;
+    }
+    
+    #main-logo {
+        width: 80px;
+        margin-top: 0;
+        margin-bottom: 0px;
+    }
+    
+    #name {
+        margin-bottom: 0;
+        margin-top: 0;
+        font-size: 1.2rem;
+    }
+}
+
