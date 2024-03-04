@@ -7,7 +7,6 @@
 </div>
 {% if beans %}
 <div class="table-container">
-    
     <table>
         <tr>
             <th>Name</th>
@@ -19,13 +18,12 @@
         </tr>
         {% for bean in beans %}
         <tr>
-            <td>{{ bean.name }}</td>
+            <td><a class="clickable-text" href="{% url "edit-bean" bean.id %}">{{ bean.name }}</a></td>
             <td>{{ bean.origin }}</td>
             <td>{{ bean.supplier }}</td>
             <td>{{ bean.notes }}</td>
             <td>{{ bean.reorder_trigger }} kg</td>
             <td>{{ bean.reorder_qty }} kg</td>
-            <td><a class="table-btn" href="{% url "edit-bean" bean.id %}">Edit Details</a></td>
         </tr>
         {% endfor %}
     </table>

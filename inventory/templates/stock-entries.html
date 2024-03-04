@@ -3,9 +3,6 @@
 {% block content %}
 <h2>Stock Entries</h2>
 {% if entries %}
-<div class="page-info">
-    <p>Update if you need!</p>
-</div>
 <div class="table-container">
     <table>
         <tr>
@@ -30,5 +27,7 @@
     <p>No entries!</p>
 </div>
 {% endif %}
-<a class="nav-btn" href="{% url "stock-management" %}">Back</a>
+<div class="form-btn-container">
+    <a class="form-btn" href="{% url "stock-management" %}">Back</a>
+</div>
 {% endblock content %}
