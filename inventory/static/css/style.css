@@ -23,15 +23,11 @@ body {
     margin: 0px;
     display: flex;
     font-family: 'Outfit', sans-serif;
-    background-color: #eaeaea;
-}
-
-footer {
-    margin-top: auto;
+    background-color: #f1f1f1;
 }
 
 h1 {
-    color: rgb(57, 57, 57);
+    color: rgb(50, 50, 50);
     font-size: 2rem;
     margin: 0px;
 }
@@ -83,6 +79,7 @@ ul {
     display: flex;
     flex-direction: column;
     padding: 40px 80px;
+    margin-left: 200px;
 }
 
 .middle-of-screen {
@@ -104,9 +101,12 @@ nav {
     height: 100vh;
     width: 200px;
     position: -webkit-sticky;
-    position: sticky;
+    position: fixed;
+    z-index: 999;
     top: 0;
-    box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.2);
+    left: 0;
+    background-color: #f1f1f1;
+    box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.1);
 }
 
 .login-container {
@@ -152,7 +152,7 @@ form {
 }
 
 .nav-list li {
-    color: rgb(69, 69, 69);
+    color: rgb(50, 50, 50);
     margin-bottom: 20px;
 }
 
@@ -182,7 +182,7 @@ form {
     border: 1px solid rgba(0, 0, 0,0.2);
     border-radius: 8px;
     padding: 5px;
-    color: rgb(22, 22, 22);
+    color: rgb(50, 50, 50);
 }
 
 .table-btn:hover {
@@ -199,7 +199,7 @@ form {
 }
 
 #form-cancel-btn {
-    color: rgb(46, 46, 46);
+    color: rgb(50, 50, 50);
 }
 
 #new-entry-btn {
@@ -279,66 +279,85 @@ input::-webkit-inner-spin-button {
 .dash-container {
     display: flex;
     margin-top: 20px;
-    width: 80%;
+    width: fit-content;
 }
 
 .dash-container h1 {
-    color: rgb(17, 17, 17);
+    color: rgb(50, 50, 50);
     margin: 0px;
 }
 
-.dash-item {
+.dash-links-container {
+    display: flex;
+}
+
+.dash-links-col1,
+.dash-links-col2,
+.dash-links-col3 {
     display: flex;
     flex-direction: column;
+}
+
+.dash-item, .dash-link {
+    display: flex;
     padding: 30px;
     margin-right: 40px;
     margin-bottom: 40px;
     height: fit-content;
     box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1);
-    background-color: rgba(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.2);
     border-radius: 10px;
 }
 
-#shopify-logo {
-    width: 60px;
+.dash-link {
+    padding: 20px;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
-#zoho-mail-logo {
-    width: 60px;
-    margin-bottom: 3px;
-}
-
-#dash-item2, #dash-item3 {
-    display: flex;
+#dash-item-todoist {
     flex-direction: column;
+}
+
+#dash-link-todoist {
+    margin: 0 auto;
+    display: flex;
     align-items: center;
 }
 
-#dash-item2 h1, #dash-item3 h1 {
-    margin: 0px;
+.logo-link {
+    width: 40px;
+    margin-right: 10px;
+}
+
+#bankaus-logo {
+    width: auto;
+    height: 40px;
 }
 
 .todoist-tasks {
     list-style: initial;
     padding-inline-start: 1em;
+    margin-bottom: 20px;
+}
+
+.todoist-task-block {
+    margin-bottom: 20px;
 }
 
 .todoist-tasks p {
-    color: rgb(0, 0, 0);
-    margin: 0px;
+    color: rgb(50, 50, 50);
     line-height: 1rem;
 }
 
-/* #todoist-link {
-    margin: 20px;
-} */
-
 footer {
+    margin-top: auto;
+    margin-left: 200px;
     display: flex;
     height: 200px;
-    /* background-color: #886042; */
     flex-direction: column;
-    width: 100%;
+    width: 80%;
     align-items: center;
     text-align: center;
 }
@@ -347,15 +366,92 @@ footer {
     width: 150px;
     line-height: 2rem;
     text-align: center;
-    text-decoration: none;
+    /* text-decoration: none; */
 }
 
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1200px) {
     #width-too-narrow {
-        display: block;
+        display: none;
     }
 
-    nav, .page-body {
-        display: none;
+    nav {
+        flex-direction: row;
+        align-items: center;
+        height: 132px;
+        width: 100vw;
+        position: -webkit-sticky;
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        background-color: #f1f1f1;
+        box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.1);
+    }
+
+    .app-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
+        height: 132px;
+        padding-left: 10px;
+    }
+
+    .app-title a {
+        line-height: 18px;
+    }
+    
+    #main-logo {
+        width: 108px;
+        margin-top: 0px;
+        margin-bottom: 0;
+    }
+    
+    #name {
+        margin-bottom: 0;
+        margin-top: 0;
+        font-size: 1.3rem;
+    }
+
+    .nav-list {
+        flex-direction: row;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .login-info-container {
+        position: absolute;
+        right: 0px;
+        top: 22px;
+        margin: 10px;
+    }
+
+    .login-info-container p {
+        font-size: 0.7rem;
+    }
+
+    .content-block {
+        padding: 20px 40px;
+        margin-left: 0;
+        margin-top: 132px;
+    }
+
+    .nav-list {
+        flex-direction: column;
+    }
+
+    .nav-list li {
+        margin: 8px;
+        padding: 10px;
+    }
+
+    footer {
+        margin-top: auto;
+        margin-left: 0px;
+        display: flex;
+        height: 200px;
+        flex-direction: column;
+        width: 100vw;
+        align-items: center;
+        text-align: center;
     }
   }

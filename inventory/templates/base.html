@@ -20,10 +20,8 @@
     </div>
     <header>
         <nav>
-            <div>
-                <a href="{% url 'home' %}"><img id="main-logo" src="{% static 'img/lsc-logo-dark.png' %}" alt="Luckie Street Coffee Logo"></a>
-            </div>
             <div class="app-title">
+                <a href="{% url 'home' %}"><img id="main-logo" src="{% static 'img/lsc-logo-dark.png' %}" alt="Luckie Street Coffee Logo"></a>
                 <a href="{% url 'home' %}"><h1 id="name">Fazenda</h1></a>
             </div>
             {% if user.is_authenticated %}
