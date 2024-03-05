@@ -2,8 +2,8 @@ from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Bean, StockEntry, StockOffset, StockTotal
-from .forms import StockEntryForm, BeanDetailsForm, StockOffsetForm
+from .models import Bean, StockEntry, StockAdjustment, StockTotal
+from .forms import StockEntryForm, BeanDetailsForm, StockAdjustmentForm
 from .todoist_controller import TodoistController
 
 def home(request):
@@ -138,27 +138,30 @@ def logout_user(request):
     messages.success(request, "You have been logged out.")
     return redirect('home')
 
-def stock_offset(request, pk):
+def new_stock_adjustment(request, pk=None):
     if request.user.is_authenticated:
-        # initialise values to pass through to page
+        # define context dictionary
         context = {}
 
-        # get the bean information from the database
-        offset = StockOffset.objects.filter(id=pk).get()
+        # initialise stock entry form with the bean chosen if 'pk' is provided
+        form_initial = {'bean': pk} if pk else None
+        form = StockAdjustmentForm(initial=form_initial)
 
-        # initialise bean details form with the existing values
-        form = StockOffsetForm(initial={
-            "bean":offset.bean,
-            "total_offset":offset.total_offset,
-        })
+        # get the bean information from the database if 'pk' is provided
+        bean = Bean.objects.filter(id=pk).first() if pk else None
 
         # context to pass through
+        context['pk'] = pk
         context['form'] = form
-        context['stock_offset'] = offset
+        context['bean'] = bean
 
         if request.method == 'POST':
             if 'save' in request.POST:
-                form = StockOffsetForm(request.POST, instance=offset)
+                form = StockAdjustmentForm(request.POST)
+                # check if an entry already exists for the current day
+                if StockAdjustment.objects.filter(date=timezone.now().date(), bean=bean).exists():
+                    messages.error(request, "An adjustment for today already exists.")
+                    return redirect('stock-management')
                 if form.is_valid():
                     form.save()
                     return redirect('stock-management')
@@ -166,7 +169,7 @@ def stock_offset(request, pk):
                 return redirect('stock-management')
 
         # show page
-        return render(request, 'stock-offset.html', context)
+        return render(request, 'new-stock-adjustment.html', context)
     else:
         messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
@@ -228,6 +231,67 @@ def edit_stock_entry(request, id):
 
         # show page
         return render(request, 'edit-stock-entry.html', context)
+
+    else:
+        messages.error(request, "You must be logged in to view this page.")
+        return redirect('home')
+    
+def view_stock_adjustments(request, pk=None):
+    if request.user.is_authenticated:
+        # initialise values to pass through to page
+        context = {}
+
+        # get entries if pk else get all
+        if pk:
+            adjustments = StockAdjustment.objects.filter(bean=pk).all().order_by('-date') # order by date descending
+        else:
+            adjustments = StockAdjustment.objects.all().order_by('-date') # order by date descending
+
+        # define context to pass through
+        context['adjustments'] = adjustments
+
+        # show page
+        return render(request, 'stock-adjustments.html', context)
+
+    else:
+        messages.error(request, "You must be logged in to view this page.")
+        return redirect('home')
+
+def edit_stock_adjustment(request, id):
+    if request.user.is_authenticated:
+        # initialise values to pass through to page
+        context = {}
+
+        # get stock adjustment with id
+        adjustment = StockAdjustment.objects.filter(id=id).get()
+
+        # get bean
+        bean = Bean.objects.filter(pk=adjustment.bean.id).get()
+
+        # initialise stock adjustment form with the bean chosen if 'pk' is provided
+        form_initial = {
+            'bean': bean,
+            'adj_amount': adjustment.adj_amount,
+            }
+        form = StockAdjustmentForm(initial=form_initial)
+
+        # define context to pass through
+        context['adjustment'] = adjustment
+        context['form'] = form
+
+        if request.method == 'POST':
+            if 'save' in request.POST:
+                form = StockAdjustmentForm(request.POST, instance=adjustment)
+                if form.is_valid():
+                    form.save()
+                    return redirect('stock-management')
+                else:
+                    messages.error(request, form.errors)
+            elif 'cancel' in request.POST:
+                return redirect('stock-management')
+
+        # show page
+        return render(request, 'edit-stock-adjustment.html', context)
 
     else:
         messages.error(request, "You must be logged in to view this page.")

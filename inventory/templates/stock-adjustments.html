@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Stock Adjustments</h2>
+{% if adjustments %}
+<div class="table-container">
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Bean</th>
+            <th>Adjustment Amount</th>
+        </tr>
+        {% for adjustment in adjustments %}
+            <tr>
+                <td>{{adjustment.date}}</td>
+                <td>{{adjustment.bean}}</td>
+                <td>{{adjustment.adj_amount}}</td>
+                <td><a class="table-btn" href="{% url "edit-stock-adjustment" id=adjustment.id %}">Edit</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+<div class="page-info">
+    <p>No adjustments!</p>
+</div>
+{% endif %}
+<div class="form-btn-container">
+    <a class="form-btn" href="{% url "stock-management" %}">Back</a>
+</div>
+{% endblock content %}

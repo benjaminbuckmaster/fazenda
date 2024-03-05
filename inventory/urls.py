@@ -12,7 +12,12 @@ urlpatterns = [
     path('stock-entries/<int:pk>/', views.view_stock_entries, name='stock-entries-detail'),
     path('edit-stock-entry/<int:id>/', views.edit_stock_entry, name='edit-stock-entry'),
 
+    path('new-stock-adjustment/', views.new_stock_adjustment, name='new-stock-adjustment'),
+    path('new-stock-adjustment/<int:pk>/', views.new_stock_adjustment, name='new-stock-adjustment-detail'),
+    path('stock-adjustments/', views.view_stock_adjustments, name='stock-adjustments'),
+    path('edit-stock-adjustment/<int:id>/', views.edit_stock_adjustment, name='edit-stock-adjustment'),
+
     path('edit-bean/<int:pk>', views.edit_bean, name='edit-bean'),
     path('logout/', views.logout_user, name='logout'),
-    path('stock-offset/<int:pk>/', views.stock_offset, name='stock-offset'),
+    
 ]

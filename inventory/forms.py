@@ -1,5 +1,5 @@
 from django import forms
-from .models import StockEntry, Bean, StockOffset
+from .models import StockEntry, Bean, StockAdjustment
 
 class StockEntryForm(forms.ModelForm):
     
@@ -31,14 +31,14 @@ class BeanDetailsForm(forms.ModelForm):
             'notes': forms.Textarea(attrs={'placeholder':'Notes'})
         }
 
-class StockOffsetForm(forms.ModelForm):
+class StockAdjustmentForm(forms.ModelForm):
 
     class Meta:
-        model = StockOffset
+        model = StockAdjustment
         fields = [
             "bean",
-            "total_offset",
-        ]
+            "adj_amount",
+            ]
         widgets = {
-            'total_offset': forms.NumberInput(attrs={'placeholder': 'Enter offset amount'}),
+            'adj_amount': forms.NumberInput(attrs={'placeholder': 'Enter quantity'}),
         }
