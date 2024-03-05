@@ -4,11 +4,11 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="welcome">
-    <h2>Hello {{ user.username }}</h2>
+    <h1>Hello {{ user.username }}</h1>
 </div>
 <div class="dash-container">
     <div class="dash-item" id="dash-item-todoist">
-        <h1>Due Today</h1>
+        <h2>Due Today</h2>
         <div class="todoist-task-block">
             {% if todoist_today %}
             <ul class="todoist-tasks">
@@ -22,7 +22,7 @@
         </div>
         {% if todoist_overdue %}
         <div class="todoist-task-block">
-            <h1>Overdue</h1>
+            <h2>Overdue</h2>
             <ul class="todoist-tasks">
                 {% for task in todoist_overdue %}
                 <li><a href="{{ task.url }}" target="_blank">{{ task.content }}</a></li>
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="dash-links-container">
-        <div class="dash-links-col1">
+        <div class="dash-links-row1">
             <div class="dash-link" id="dash-link-shopify">
                 <a href="https://luckie-street-coffee.myshopify.com/admin" target="_blank" id="shopify-link"><img class="logo-link" id="shopify-logo" src="{% static 'img/shopify-logo.png' %}" alt="Shopify Logo"></a>
                 <a href="https://luckie-street-coffee.myshopify.com/admin" target="_blank" id="shopify-link"><p><strong>Shopify</strong></p>
@@ -45,25 +45,23 @@
                 <a href="https://www.readytoship.com.au/cms/shipruns.html?" target="_blank" id="readytoship-link"><img class="logo-link" id="readytoship-logo" src="{% static 'img/readytoship-logo.png' %}" alt="Ready To Ship Logo"></a>
                 <a href="https://www.readytoship.com.au/cms/shipruns.html?" target="_blank" id="readytoship-link"><p><strong>Ready To Ship</strong></p>
             </div>
-        </div>
-        <div class="dash-links-col2">
-            <div class="dash-link" id="dash-link-zoho-mail">
-                <a href="https://mail.zoho.com.au/zm/#mail/folder/inbox" target="_blank" id="zoho-mail-link"><img class="logo-link" id="zoho-mail-logo" src="{% static 'img/zoho-mail-logo.png' %}" alt="Zoho Mail Logo"></a>
-                <a href="https://mail.zoho.com.au/zm/#mail/folder/inbox" target="_blank" id="zoho-mail-link"><p><strong>Mail</strong></p>
-            </div>
             <div class="dash-link" id="dash-link-chat">
                 <a href="https://mail.google.com/chat" target="_blank" id="chat-link"><img class="logo-link" id="chat-logo" src="{% static 'img/chat-logo.png' %}" alt="Google Chat Logo"></a>
                 <a href="https://mail.google.com/chat" target="_blank" id="chat-link"><p><strong>Chat</strong></p>
             </div>
         </div>
-        <div class="dash-links-col3">
-            <div class="dash-link" id="dash-link-bankaus">
-                <a href="https://digital.bankaust.com.au/accounts/balances/" target="_blank" id="bankaus-link"><img class="logo-link" id="bankaus-logo" src="{% static 'img/bankaus-logo.png' %}" alt="Bank Australia Logo"></a>
-                <a href="https://digital.bankaust.com.au/accounts/balances/" target="_blank" id="bankaus-link"><p><strong>BankAus</strong></p>
+        <div class="dash-links-row2">
+            <div class="dash-link" id="dash-link-zoho-mail">
+                <a href="https://mail.zoho.com.au/zm/#mail/folder/inbox" target="_blank" id="zoho-mail-link"><img class="logo-link" id="zoho-mail-logo" src="{% static 'img/zoho-mail-logo.png' %}" alt="Zoho Mail Logo"></a>
+                <a href="https://mail.zoho.com.au/zm/#mail/folder/inbox" target="_blank" id="zoho-mail-link"><p><strong>Mail</strong></p>
             </div>
             <div class="dash-link" id="dash-link-zoho-books">
                 <a href="https://books.zoho.com.au/app/" target="_blank" id="zoho-books-link"><img class="logo-link" id="zoho-books-logo" src="{% static 'img/zoho-books-logo.png' %}" alt="Zoho Books Logo"></a>
                 <a href="https://books.zoho.com.au/app/" target="_blank" id="zoho-books-link"><p><strong>Zoho Books</strong></p>
+            </div>
+            <div class="dash-link" id="dash-link-bankaus">
+                <a href="https://digital.bankaust.com.au/accounts/balances/" target="_blank" id="bankaus-link"><img class="logo-link" id="bankaus-logo" src="{% static 'img/bankaus-logo.png' %}" alt="Bank Australia Logo"></a>
+                <a href="https://digital.bankaust.com.au/accounts/balances/" target="_blank" id="bankaus-link"><p><strong>BankAus</strong></p>
             </div>
         </div>
     </div>

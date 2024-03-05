@@ -1,29 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Bean Management</h2>
+<h1>Beans</h1>
 <div class="page-info">
     <p>View and update details for beans in your inventory.</p>
 </div>
 {% if beans %}
 <div class="table-container">
-    <table>
+    <table id="bean-info-table">
         <tr>
             <th>Name</th>
-            <th>Origin</th>
-            <th>Supplier</th>
-            <th>Notes</th>
-            <th>Reorder Trigger</th>
-            <th>Reorder Quantity</th>
+            <th>Stock</th>
         </tr>
         {% for bean in beans %}
         <tr>
-            <td><a class="clickable-text" href="{% url "edit-bean" bean.id %}">{{ bean.name }}</a></td>
-            <td>{{ bean.origin }}</td>
-            <td>{{ bean.supplier }}</td>
-            <td>{{ bean.notes }}</td>
-            <td>{{ bean.reorder_trigger }} kg</td>
-            <td>{{ bean.reorder_qty }} kg</td>
+            <td>
+                <a class="clickable-text" href="{% url "bean-details" bean.id %}">
+                    {{ bean.name }}
+                </a>
+            </td>
+            <td>
+                <a class="clickable-text" href="{% url "stock-entries-detail" bean.id %}">
+                    {% for stock_total in stock_totals %}
+                    {% if stock_total.bean == bean %}
+                        {{ stock_total.total_quantity }} kg
+                    {% endif %}
+                    {% endfor %}
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </table>

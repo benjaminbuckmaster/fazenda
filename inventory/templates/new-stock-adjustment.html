@@ -1,27 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>New Stock Adjustment</h2>
+<h1>New Stock Adjustment</h1>
 <div class="page-info">
     <p>Note: you can only enter one adjustment per day.</p>
 </div>
-<form method="POST" action="">
-    {% csrf_token %}
-    <div class="form-container">
-        <table>
-            <tr>
+<div class="new-stock-adjustment-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-container">
+            <table>
                 <th>Bean</th>
+                <tr>
+                    <td>{{form.bean}}</td>
+                </tr>
                 <th>Adjustment Amount (kg)</th>
-            </tr>
-            <tr>
-                <td>{{form.bean}}</td>
-                <td>{{form.adj_amount}}</td>
-            </tr>
-        </table>
+                <tr>
+                    <td>{{form.adj_amount}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-btn-container">
+            <button class="form-btn" id="form-save-btn" name="save">Save Adjustment</button>
+        </div>
+    </form>
+    <div class="body-btn-container">
+        <a class="form-btn" href="{% url "bean-information" %}">Cancel</a>
     </div>
-    <div class="form-btn-container">
-        <button class="form-btn" id="form-save-btn" name="save">Save</button>
-        <button class="form-btn" id="form-cancel-btn" name="cancel">Cancel</button>
-    </div>
-</form>
+</div>
+
 {% endblock content %}

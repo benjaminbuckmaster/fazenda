@@ -26,11 +26,11 @@
             </div>
             {% if user.is_authenticated %}
             <ul class="nav-list">
-                <li><a href="{% url 'bean-information' %}">Manage Beans</a></li>
-                <li><a href="{% url 'stock-management' %}">Manage Stock</a></li>
+                <a href="{% url 'bean-information' %}"><li>Beans</li></a>
+                <a href="{% url 'statistics' %}"><li>Stats</li></a>
             </ul>
             <div class="login-info-container">
-                <p>Logged in as {{ user.username }}</p>
+                <p>Logged in as <br>{{ user.username }}</p>
                 <a id="logout-btn" href="{% url 'logout' %}">Logout</a>
             </div>
             {% endif %}
@@ -43,7 +43,9 @@
                 <ul class="messages-error">
                     {% for message in messages %}
                         {% if message.tags %}
-                        <li class="message-{{ message.tags }}">{{ message }}</li>
+                        <li class="message-{{ message.tags }}">
+                            {{ message }}
+                        </li>
                         {% endif %}
                     {% endfor %}
                 </ul>

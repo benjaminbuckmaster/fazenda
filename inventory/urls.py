@@ -15,9 +15,12 @@ urlpatterns = [
     path('new-stock-adjustment/', views.new_stock_adjustment, name='new-stock-adjustment'),
     path('new-stock-adjustment/<int:pk>/', views.new_stock_adjustment, name='new-stock-adjustment-detail'),
     path('stock-adjustments/', views.view_stock_adjustments, name='stock-adjustments'),
+    path('stock-adjustments/<int:pk>/', views.view_stock_adjustments, name='stock-adjustments-detail'),
     path('edit-stock-adjustment/<int:id>/', views.edit_stock_adjustment, name='edit-stock-adjustment'),
 
-    path('edit-bean/<int:pk>', views.edit_bean, name='edit-bean'),
+    path('statistics/', views.statistics, name='statistics'),
+
+    path('bean-details/<int:pk>', views.bean_details, name='bean-details'),
     path('logout/', views.logout_user, name='logout'),
     
 ]

@@ -50,11 +50,21 @@ def stock_management(request):
 
 def bean_information(request):
     if request.user.is_authenticated:
+        # define context dictionary
+        context = {}
+
         # get the bean information from the database
         beans = Bean.objects.all().order_by('name')
 
-        # shows bean information and passes through bean information
-        return render(request, 'bean.html', {'beans':beans})
+        # get stock management information
+        stock_totals = StockTotal.objects.all().order_by('bean__name') # order by name descending
+
+        # context to pass through
+        context['beans'] = beans
+        context['stock_totals'] = stock_totals
+
+        # shows bean information and passes through context
+        return render(request, 'bean.html', context)
     else:
         messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
@@ -95,7 +105,7 @@ def new_stock_entry(request, pk=None):
         messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
 
-def edit_bean(request, pk):
+def bean_details(request, pk):
     if request.user.is_authenticated:
         # initialise values to pass through to page
         context = {}
@@ -128,7 +138,7 @@ def edit_bean(request, pk):
                 return redirect('bean-information')
         
         # show page
-        return render(request, 'edit-bean.html', context)
+        return render(request, 'bean-details.html', context)
     else:
         messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
@@ -292,6 +302,18 @@ def edit_stock_adjustment(request, id):
 
         # show page
         return render(request, 'edit-stock-adjustment.html', context)
+
+    else:
+        messages.error(request, "You must be logged in to view this page.")
+        return redirect('home')
+    
+def statistics(request):
+    if request.user.is_authenticated:
+        # initialise values to pass through to page
+        context = {}
+
+        # show page
+        return render(request, 'statistics.html', context)
 
     else:
         messages.error(request, "You must be logged in to view this page.")

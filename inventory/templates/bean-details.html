@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Bean Details</h1>
+<div class="bean-details-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-container">
+            <table>
+                <th>Name</th>
+                <tr>
+                    <td>{{ form.name }}</td>
+                </tr>
+                <th>Origin</th>
+                <tr>
+                    <td>{{ form.origin }}</td>
+                </tr>
+                <th>Supplier</th>
+                <tr>
+                    <td>{{ form.supplier }}</td>
+                </tr>
+                <th>Reorder Trigger</th>
+                <tr>
+                    <td>{{ form.reorder_trigger }} kg</td>
+                </tr>
+                <th>Reorder Quantity</th>
+                <tr>
+                    <td>{{ form.reorder_qty }} kg</td>
+                </tr>
+                <th>Notes</th>
+                <tr>
+                    <td>{{ form.notes }}</td>
+                </tr>
+            </table>
+            <div class="form-btn-container">
+                <button class="form-btn" id="form-save-btn" name="save">Save Changes</button>
+            </div>
+        </div>
+    </form>
+    <div class="body-btn-container">
+        <a class="body-btn" href="{% url "stock-adjustments-detail" pk=bean.id %}">Stock Adjustments</a>
+        <a class="body-btn" href="{% url "bean-information" %}">Back</a>
+    </div>
+</div>
+
+{% endblock content %}
