@@ -157,7 +157,11 @@ form {
 
 .bean-details-body,
 .stock-adjustments-body,
-.new-stock-adjustment-body {
+.new-stock-adjustment-body,
+.stock-entries-body,
+.new-stock-entry-body,
+.edit-stock-entry-body,
+.edit-stock-adjustment-body {
     margin-top: 40px;
     display: flex;
     flex-direction: row;
@@ -232,7 +236,7 @@ form {
 }
 
 #new-entry-btn {
-    background-color: rgba(255, 244, 231, 0.5);
+    border: 1px solid rgb(180, 180, 180);
 }
 
 table {
@@ -559,7 +563,11 @@ footer {
 
     .bean-details-body,
     .stock-adjustments-body,
-    .new-stock-adjustment-body {
+    .new-stock-adjustment-body,
+    .stock-entries-body,
+    .new-stock-entry-body,
+    .edit-stock-entry-body,
+    .edit-stock-adjustment-body {
         margin-top: 30px;
         flex-direction: column;
     }

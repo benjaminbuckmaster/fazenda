@@ -2,33 +2,32 @@
 
 {% block content %}
 <h1>Stock Entries</h1>
-{% if entries %}
-<div class="table-container">
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Bean</th>
-            <th>Quantity Added (kg)</th>
-            <th>Quantity Used (kg)</th>
-            <th></th>
-        </tr>
+<div class="stock-entries-body">
+    {% if entries %}
+    <div class="table-container">
         {% for entry in entries %}
-            <tr>
-                <td>{{entry.date}}</td>
-                <td>{{entry.bean}}</td>
-                <td>{{entry.qty_added}}</td>
-                <td>{{entry.qty_used}}</td>
-                <td><a class="table-btn" href="{% url "edit-stock-entry" id=entry.id %}">Edit</a></td>
-            </tr>
+        <table>
+            <th>Date</th>
+            <tr><td>{{entry.date}}</td></tr>
+            <th>Bean</th>
+            <tr><td>{{entry.bean}}</td></tr>
+            <th>Quantity Added (kg)</th>
+            <tr><td>{{entry.qty_added}}</td></tr>
+            <th>Quantity Used (kg)</th>
+            <tr><td>{{entry.qty_used}}</td></tr>
+            <tr><td><a class="table-btn" href="{% url "edit-stock-entry" id=entry.id %}">Edit</a></td></tr>
+        </table>
+        <br>
+        <br>
         {% endfor %}
-    </table>
-</div>
-{% else %}
-<div class="page-info">
-    <p>No entries!</p>
-</div>
-{% endif %}
-<div class="form-btn-container">
-    <a class="form-btn" href="{% url "bean-information" %}">Back</a>
+    </div>
+    {% else %}
+    <div class="page-info">
+        <p>No entries!</p>
+    </div>
+    {% endif %}
+    <div class="body-btn-container">
+        <a class="body-btn" href="{% url "bean-information" %}">Back</a>
+    </div>
 </div>
 {% endblock content %}

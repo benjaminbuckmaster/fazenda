@@ -92,12 +92,12 @@ def new_stock_entry(request, pk=None):
                 # check if an entry already exists for the current day
                 if StockEntry.objects.filter(date=timezone.now().date(), bean=bean).exists():
                     messages.error(request, "An entry for today already exists.")
-                    return redirect('stock-management')
+                    return redirect('bean-information')
                 if form.is_valid():
                     form.save()
-                    return redirect('stock-management')
+                    return redirect('bean-information')
             elif 'cancel' in request.POST:
-                return redirect('stock-management')
+                return redirect('bean-information')
 
         # show page
         return render(request, 'new-stock-entry.html', context)
@@ -171,12 +171,12 @@ def new_stock_adjustment(request, pk=None):
                 # check if an entry already exists for the current day
                 if StockAdjustment.objects.filter(date=timezone.now().date(), bean=bean).exists():
                     messages.error(request, "An adjustment for today already exists.")
-                    return redirect('stock-management')
+                    return redirect('bean-information')
                 if form.is_valid():
                     form.save()
-                    return redirect('stock-management')
+                    return redirect('bean-information')
             elif 'cancel' in request.POST:
-                return redirect('stock-management')
+                return redirect('bean-information')
 
         # show page
         return render(request, 'new-stock-adjustment.html', context)
@@ -233,11 +233,11 @@ def edit_stock_entry(request, id):
                 form = StockEntryForm(request.POST, instance=entry)
                 if form.is_valid():
                     form.save()
-                    return redirect('stock-management')
+                    return redirect('bean-information')
                 else:
                     messages.error(request, form.errors)
             elif 'cancel' in request.POST:
-                return redirect('stock-management')
+                return redirect('bean-information')
 
         # show page
         return render(request, 'edit-stock-entry.html', context)
@@ -294,11 +294,11 @@ def edit_stock_adjustment(request, id):
                 form = StockAdjustmentForm(request.POST, instance=adjustment)
                 if form.is_valid():
                     form.save()
-                    return redirect('stock-management')
+                    return redirect('bean-information')
                 else:
                     messages.error(request, form.errors)
             elif 'cancel' in request.POST:
-                return redirect('stock-management')
+                return redirect('bean-information')
 
         # show page
         return render(request, 'edit-stock-adjustment.html', context)

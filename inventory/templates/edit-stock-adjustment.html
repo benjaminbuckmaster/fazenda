@@ -4,25 +4,26 @@
 <h1>Edit Adjustment</h1>
 <div class="page-info">
 </div>
-<form method="POST" action="">
-    {% csrf_token %}
-    <div class="form-container">
-        <table>
-            <tr>
+<div class="edit-stock-adjustment-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-container">
+            <table>
                 <th>Date</th>
+                <tr><td>{{adjustment.date}}</td></tr>
                 <th>Bean</th>
+                <tr><td>{{form.bean}}</td></tr>
                 <th>Adjustment Amount</th>
-            </tr>
-            <tr>
-                <td>{{adjustment.date}}</td>
-                <td>{{form.bean}}</td>
-                <td>{{form.adj_amount}}</td>
-            </tr>
-        </table>
-        <div class="form-btn-container">
-            <button class="form-btn" id="form-save-btn" name="save">Save</button>
-            <button class="form-btn" id="form-cancel-btn" name="cancel">Cancel</button>
+                <tr><td>{{form.adj_amount}}</td></tr>
+            </table>
+            <div class="form-btn-container">
+                <button class="form-btn" id="form-save-btn" name="save">Save Changes</button>
+            </div>
         </div>
+    </form>
+    <div class="body-btn-container">
+        <a class="body-btn" href="{% url "bean-information" %}">Back</a>
     </div>
-</form>
+</div>
+
 {% endblock content %}

@@ -8,20 +8,12 @@
         {% for adjustment in adjustments %}
         <table>
             <th>Date</th>
-            <tr>
-                <td>{{adjustment.date}}</td>
-            </tr>
+            <tr><td>{{adjustment.date}}</td></tr>
             <th>Bean</th>
-            <tr>
-                <td>{{adjustment.bean}}</td>
-            </tr>
+            <tr><td>{{adjustment.bean}}</td></tr>
             <th>Adjustment Amount</th>
-            <tr>
-                <td>{{adjustment.adj_amount}}</td>
-            </tr>
-            <tr>
-                <td><a class="table-btn" href="{% url "edit-stock-adjustment" id=adjustment.id %}">Edit</a></td>
-            </tr>
+            <tr><td>{{adjustment.adj_amount}}</td></tr>
+            <tr><td><a class="table-btn" href="{% url "edit-stock-adjustment" id=adjustment.id %}">Edit</a></td></tr>
         </table>
         <br>
         <br>

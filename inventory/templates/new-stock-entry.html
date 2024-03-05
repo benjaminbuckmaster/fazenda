@@ -5,25 +5,25 @@
 <div class="page-info">
     <p>Note: you can only enter one entry per day.</p>
 </div>
-<form method="POST" action="">
-    {% csrf_token %}
-    <div class="form-container">
-        <table>
-            <tr>
+<div class="new-stock-entry-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="form-container">
+            <table>
                 <th>Bean</th>
-                <th>Quantity Added (kg)</th>
+                <tr><td>{{form.bean}}</td></tr>
                 <th>Quantity Used (kg)</th>
-            </tr>
-            <tr>
-                <td>{{form.bean}}</td>
-                <td>{{form.qty_added}}</td>
-                <td>{{form.qty_used}}</td>
-            </tr>
-        </table>
+                <tr><td>{{form.qty_used}}</td></tr>
+                <th>Quantity Added (kg)</th>
+                <tr><td>{{form.qty_added}}</td></tr>
+            </table>
+            <div class="form-btn-container">
+                <button class="form-btn" id="form-save-btn" name="save">Save</button>
+            </div>
+        </div>
+    </form>
+    <div class="body-btn-container">
+        <a class="body-btn" href="{% url "bean-information" %}">Back</a>
     </div>
-    <div class="form-btn-container">
-        <button class="form-btn" id="form-save-btn" name="save">Save</button>
-        <button class="form-btn" id="form-cancel-btn" name="cancel">Cancel</button>
-    </div>
-</form>
+</div>
 {% endblock content %}
