@@ -321,12 +321,13 @@ def statistics(request):
         consumption_data = []
         for bean in Bean.objects.all():
             total_qty_used = recent_stock_entries.filter(bean=bean).aggregate(Sum('qty_used'))['qty_used__sum'] or 0
+            # can include adjustment if decided that it is necessary
             total_adjustment = StockAdjustment.objects.filter(bean=bean, date__gte=thirty_days_ago).aggregate(Sum('adj_amount'))['adj_amount__sum'] or 0
             total_consumption = total_qty_used + total_adjustment
 
             consumption_data.append({
                 'bean_name': bean.name,
-                'total_consumption': total_consumption
+                'total_consumption': total_qty_used
             })
 
         return consumption_data
