@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+from django.db.models import Sum
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -308,9 +310,35 @@ def edit_stock_adjustment(request, id):
         return redirect('home')
     
 def statistics(request):
+    def beans_consumption_last_30_days():
+        # Calculate the date 30 days ago
+        thirty_days_ago = date.today() - timedelta(days=30)
+
+        # Filter StockEntry instances in the last 30 days
+        recent_stock_entries = StockEntry.objects.filter(date__gte=thirty_days_ago)
+
+        # Calculate total consumption for each bean in the last 30 days
+        consumption_data = []
+        for bean in Bean.objects.all():
+            total_qty_used = recent_stock_entries.filter(bean=bean).aggregate(Sum('qty_used'))['qty_used__sum'] or 0
+            total_adjustment = StockAdjustment.objects.filter(bean=bean, date__gte=thirty_days_ago).aggregate(Sum('adj_amount'))['adj_amount__sum'] or 0
+            total_consumption = total_qty_used + total_adjustment
+
+            consumption_data.append({
+                'bean_name': bean.name,
+                'total_consumption': total_consumption
+            })
+
+        return consumption_data
+    
     if request.user.is_authenticated:
         # initialise values to pass through to page
         context = {}
+
+        consumption_data_last_30_days = beans_consumption_last_30_days()
+
+        # define context to pass through to page
+        context['consumption_data_last_30_days'] = consumption_data_last_30_days
 
         # show page
         return render(request, 'statistics.html', context)

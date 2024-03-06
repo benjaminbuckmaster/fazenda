@@ -161,7 +161,8 @@ form {
 .stock-entries-body,
 .new-stock-entry-body,
 .edit-stock-entry-body,
-.edit-stock-adjustment-body {
+.edit-stock-adjustment-body,
+.statistics-body {
     margin-top: 40px;
     display: flex;
     flex-direction: row;
@@ -243,14 +244,32 @@ table {
     border-collapse: collapse;
 }
 
-.table-container, .form-container {
+.table-container, 
+.form-container,
+.chart-container {
     display: flex;
     flex-direction: column;
-    width: 350px;
+    min-width: 400px;
+    max-width: 800px;
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 8px;
     padding: 32px;
     box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.1);
+}
+
+#consumption-stats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.stats-container-title {
+    text-align: center;
+}
+
+canvas#pieChart {
+    width: 450px !important;
+    height: 450px !important;
 }
 
 tr {
@@ -545,9 +564,12 @@ footer {
         width: 90%;
     }
 
-    .table-container, .form-container {
+    .table-container,
+    .form-container,
+    .chart-container {
         padding: 20px;
-        max-width: 80%;
+        min-width: 0px;
+        max-width: 90%;
     }
 
     table {
@@ -567,7 +589,8 @@ footer {
     .stock-entries-body,
     .new-stock-entry-body,
     .edit-stock-entry-body,
-    .edit-stock-adjustment-body {
+    .edit-stock-adjustment-body,
+    .statistics-body {
         margin-top: 30px;
         flex-direction: column;
     }
@@ -580,6 +603,16 @@ footer {
 
     .body-btn-container .body-btn {
         width: auto;
+    }
+
+    #consumption-stats {
+        flex-direction: column;
+    }
+
+    canvas#pieChart {
+        margin-top: 20px !important;
+        height: 300px !important;
+        width: 300px !important;
     }
 }
 

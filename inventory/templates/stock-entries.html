@@ -8,14 +8,21 @@
         {% for entry in entries %}
         <table>
             <th>Date</th>
-            <tr><td>{{entry.date}}</td></tr>
+            <tr>
+                <td>{{entry.date}}</td>
+                <td><a class="table-btn" href="{% url "edit-stock-entry" id=entry.id %}">Edit</a></td>
+            </tr>
             <th>Bean</th>
             <tr><td>{{entry.bean}}</td></tr>
-            <th>Quantity Added (kg)</th>
-            <tr><td>{{entry.qty_added}}</td></tr>
-            <th>Quantity Used (kg)</th>
-            <tr><td>{{entry.qty_used}}</td></tr>
-            <tr><td><a class="table-btn" href="{% url "edit-stock-entry" id=entry.id %}">Edit</a></td></tr>
+            <tr>
+                <th>Quantity Added (kg)</th>
+                <th>Quantity Used (kg)</th>
+            </tr>
+            <tr>
+                <td>{{entry.qty_added}}</td>
+                <td>{{entry.qty_used}}</td>
+            </tr>
+            <tr></tr>
         </table>
         <br>
         <br>
