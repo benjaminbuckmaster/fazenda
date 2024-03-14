@@ -225,8 +225,9 @@ form {
 .table-btn {
     border: 1px solid rgba(0, 0, 0,0.2);
     border-radius: 8px;
-    padding: 5px;
+    padding: 3px;
     color: rgb(50, 50, 50);
+    width: fit-content;
 }
 
 .table-btn:hover {
@@ -312,6 +313,14 @@ th, td {
 #bean-info-table td {
     min-width: 100px;
     width: fit-content;
+}
+
+.low-stock {
+    width: fit-content;
+    padding-left: 4px;
+    padding-right: 4px;
+    background-color: rgb(170, 0, 0);
+    color: white;
 }
 
 button, input, select, textarea {
