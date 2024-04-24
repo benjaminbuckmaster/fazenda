@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Bean, StockEntry, StockAdjustment, StockTotal
 from .forms import StockEntryForm, BeanDetailsForm, StockAdjustmentForm
-from .todoist_controller import TodoistController
+from .todoist_controller import TodoistController # type: ignore
 
 def home(request):
     # initialise context to pass through to page
