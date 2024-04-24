@@ -36,5 +36,59 @@
         {% endfor %}
     </table>
 </div>
+<div class="chart-container">
+    <canvas id="barChart"></canvas>
+    <script>
+        // Get data from Django context
+        var labels = [{% for stock_total in stock_totals %}"{{ stock_total.bean.name }}", {% endfor %}];
+        var values = [{% for stock_total in stock_totals %}{{ stock_total.total_quantity }}, {% endfor %}];
+        
+        // Convert values to numbers
+        values = values.map(Number);
+        
+        // Create a bar chart
+    var ctx = document.getElementById('barChart').getContext('2d');
+
+    // Initialize an empty array to store backgroundColors
+    var backgroundColors = [];
+
+    {% for stock_total in stock_totals %}
+        {% if stock_total.total_quantity < stock_total.bean.reorder_trigger %}
+            backgroundColors.push('rgba(170, 0, 0, 0.7)'); // Red color for low stock
+        {% else %}
+            backgroundColors.push('rgba(0, 128, 5, 0.7)'); // Green color for normal stock
+        {% endif %}
+    {% endfor %}
+
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Stock Quantity (kg)',
+                data: values,
+                backgroundColor: backgroundColors,
+                borderRadius: 3,
+            }],
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                title: {}
+            },
+        }
+    });
+    </script>
+</div>
 {% endif %}
 {% endblock content %}

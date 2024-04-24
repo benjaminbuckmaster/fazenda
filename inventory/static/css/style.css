@@ -260,7 +260,7 @@ table {
 .chart-container {
     display: flex;
     flex-direction: column;
-    min-width: 400px;
+    min-width: 300px;
     max-width: 800px;
     background-color: rgba(255, 255, 255, 0.4);
     /* border-radius: 8px;
@@ -281,6 +281,10 @@ table {
 canvas#pieChart {
     width: 450px !important;
     height: 450px !important;
+}
+
+canvas#barChart {
+    min-height: 300px !important;
 }
 
 tr {
@@ -599,7 +603,7 @@ footer {
     .chart-container {
         padding: 20px;
         min-width: 0px;
-        max-width: 90%;
+        max-width: 88%;
     }
 
     table {
