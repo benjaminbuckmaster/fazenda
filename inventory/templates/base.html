@@ -71,8 +71,8 @@
         </nav>
     </header>
     
-    <div class="page-body">
-        <div class="content-block">
+    <div class="page-content">
+        <div class="messages">
             {% if messages %}
                 <ul class="messages-error">
                     {% for message in messages %}
@@ -84,9 +84,10 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-            {% block content %}{% endblock content %}
         </div>
-    
+
+        {% block content %}{% endblock content %}
+
         <footer>
             <ul>
                 <li><a class="footer-btn" href="http://www.luckiestreetcoffee.com" target="_blank">www.luckiestreetcoffee.com.au</a></li>

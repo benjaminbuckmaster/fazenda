@@ -8,6 +8,8 @@ from django.contrib import messages
 from .models import Bean, Product, ProductBean, ProductPackaging, ProductShipping, Shipping, StockEntry, StockAdjustment, StockTotal
 from .forms import StockEntryForm, BeanDetailsForm, StockAdjustmentForm
 from .todoist_controller import TodoistController # type: ignore
+import plotly.express as px
+import pandas as pd
 
 def home(request):
     # initialise context to pass through to page
@@ -69,12 +71,14 @@ def bean_information(request):
         # get the bean information from the database
         beans = Bean.objects.all().order_by('name')
 
-        # get stock management information
-        stock_totals = StockTotal.objects.all().order_by('bean__name') # order by name descending
+        stock_totals = StockTotal.objects.all().order_by('-total_quantity')
+
+        chart = chart_stock_totals(stock_totals)
 
         # context to pass through
         context['beans'] = beans
         context['stock_totals'] = stock_totals
+        context['chart'] = chart
 
         # shows bean information and passes through context
         return render(request, 'bean.html', context)
@@ -358,6 +362,30 @@ def statistics(request):
     else:
         messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
+    
+def chart_stock_totals(stock_totals):
+    color = ['#008042']
+
+    df = pd.DataFrame(list(stock_totals.values("bean__name", "total_quantity")))
+    fig = px.bar(
+        df,
+        x="bean__name",
+        y="total_quantity",
+        title="Stock Totals",
+        labels={"bean__name": "Bean", "total_quantity": "Total Quantity"},
+        color_discrete_sequence=color,
+    )
+    fig.update_layout(
+            yaxis_title=None,
+            xaxis_title=None,
+            title=None,
+            margin=dict(l=0, r=0, t=40, b=20),
+            plot_bgcolor='#ffffff',
+        )
+    fig.update_yaxes(gridcolor='#f1f1f1')
+
+    chart_html = fig.to_html()
+    return chart_html
     
 def calculate_cogs(product):
     raw_cost = Decimal(0)

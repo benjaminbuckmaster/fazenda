@@ -3,9 +3,6 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<div class="welcome">
-    <h1>Hello {{ user.username }}</h1>
-</div>
 <div class="dash-container">
     <div class="dash-item" id="dash-item-todoist">
         <h2>Due Today</h2>
@@ -17,7 +14,8 @@
                 {% endfor %}
             </ul>
             {% else %}
-            <p>No tasks due today</p>
+            {% comment %} <p>No tasks due today</p> {% endcomment %}
+            <p>Currently unavailable. Please go to the app to see tasks.</p>
             {% endif %}
         </div>
         {% if todoist_overdue %}
@@ -36,6 +34,7 @@
         </div>
     </div>
     <div class="dash-links-container">
+        <h4>Operations</h4>
         <div class="dash-links-row1">
             <div class="dash-link" id="dash-link-shopify">
                 <a href="https://luckie-street-coffee.myshopify.com/admin" target="_blank" id="shopify-link"><img class="logo-link" id="shopify-logo" src="{% static 'img/shopify-logo.png' %}" alt="Shopify Logo"></a>
@@ -50,6 +49,7 @@
                 <a href="https://mail.google.com/chat" target="_blank" id="chat-link"><p><strong>Chat</strong></p>
             </div>
         </div>
+        <h4>Admin</h4>
         <div class="dash-links-row2">
             <div class="dash-link" id="dash-link-zoho-mail">
                 <a href="https://mail.zoho.com.au/zm/#mail/folder/inbox" target="_blank" id="zoho-mail-link"><img class="logo-link" id="zoho-mail-logo" src="{% static 'img/zoho-mail-logo.png' %}" alt="Zoho Mail Logo"></a>
