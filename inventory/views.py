@@ -1,10 +1,11 @@
 from datetime import date, timedelta
+from decimal import Decimal
 from django.db.models import Sum
 from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Bean, StockEntry, StockAdjustment, StockTotal
+from .models import Bean, Product, ProductBean, ProductPackaging, ProductShipping, Shipping, StockEntry, StockAdjustment, StockTotal
 from .forms import StockEntryForm, BeanDetailsForm, StockAdjustmentForm
 from .todoist_controller import TodoistController # type: ignore
 
@@ -27,17 +28,27 @@ def home(request):
             messages.error(request, "Login error. Plase try again.")
             return redirect('home')
         
-    todoist = TodoistController()
+    # # Check if the page is being rendered after a successful login or a manual refresh
+    # if request.method == 'GET':
+    #     # Instantiate TodoistController
+    #     todoist = TodoistController()
 
-    todoist_today = todoist.get_today()
-    todoist_overdue = todoist.get_overdue()
+    #     # Fetch data from Todoist API
+    #     todoist_today = todoist.get_today()
+    #     todoist_overdue = todoist.get_overdue()
 
-    # add context to pass through
-    context['todoist_today'] = todoist_today
-    context['todoist_overdue'] = todoist_overdue
+    #     # Add fetched data to context
+    #     context = {
+    #         'todoist_today': todoist_today,
+    #         'todoist_overdue': todoist_overdue,
+    #         'api_in_progress': True  # Set a flag indicating that the API call is in progress
+    #     }
 
-    # show the homepage
-    return render(request, 'home.html', context)
+    #     # Show the homepage
+    #     return render(request, 'home.html', context)
+
+    # Default case
+    return render(request, 'home.html')
 
 def stock_management(request):
     if request.user.is_authenticated:
@@ -344,6 +355,34 @@ def statistics(request):
         # show page
         return render(request, 'statistics.html', context)
 
+    else:
+        messages.error(request, "You must be logged in to view this page.")
+        return redirect('home')
+    
+def calculate_cogs(product):
+    raw_cost = Decimal(0)
+    
+    productbeans = ProductBean.objects.filter(product=product)
+    for productbean in productbeans:
+        if productbean.product.size == '250g':
+            raw_cost += productbean.bean.cost * Decimal('0.25') * (productbean.percentage / 100)
+        elif productbean.product.size == '500g':
+            raw_cost += productbean.bean.cost * Decimal('0.5') * (productbean.percentage / 100)
+        else:
+            raw_cost += productbean.bean.cost * (productbean.percentage / 100)
+        
+    cogs = raw_cost * Decimal('1.2')
+    return cogs
+
+def product_pricing(request):
+    if request.user.is_authenticated:
+        context = {}
+        products = Product.objects.all()
+        for product in products:
+            cogs = calculate_cogs(product)
+            context[product] = cogs
+
+        return render(request, 'product-pricing.html', {'product_costs': context})
     else:
         messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
