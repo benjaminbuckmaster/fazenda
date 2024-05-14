@@ -206,16 +206,68 @@ table {
 .table-container,
 .form-container,
 .chart-container {
-    margin-top: 20px;
     display: flex;
-    flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.4);
-    width: 50vw;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin-top: 20px; /* Adjust margin as needed */
+    width: 100%;
+}
+
+.chart-container {
+    border: 1px solid #e3e3e3;
+    /* box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1); */
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 10px;
 }
 
 .container-row {
-    width: inherit;
+    width: auto;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bean-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.bean-card, .bean-card-low-stock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 150px;
+    height: 150px;
+    padding: 4px;
+    margin: 8px;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+    /* box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1); */
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 10px;
+}
+
+.bean-card-low-stock {
+    background-color: darkred;
+    color: white;
+}
+
+.bean-card:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.bean-card-low-stock:hover {
+    background-color: rgb(125, 0, 0);
+}
+
+.bean-card-qty {
+    font-size: 1.5rem;
+}
+
+.bean-card-origin {
+    font-size: 0.7rem;
 }
 
 .vertical-space {
@@ -269,14 +321,6 @@ th, td {
 #bean-info-table td {
     min-width: 100px;
     width: fit-content;
-}
-
-.low-stock {
-    width: fit-content;
-    padding-left: 4px;
-    padding-right: 4px;
-    background-color: rgb(170, 0, 0);
-    color: white;
 }
 
 button, input, select, textarea {

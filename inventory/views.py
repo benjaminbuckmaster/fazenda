@@ -9,6 +9,7 @@ from .models import Bean, Product, ProductBean, ProductPackaging, ProductShippin
 from .forms import StockEntryForm, BeanDetailsForm, StockAdjustmentForm
 from .todoist_controller import TodoistController # type: ignore
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 
 def home(request):
@@ -367,22 +368,26 @@ def chart_stock_totals(stock_totals):
     color = ['#008042']
 
     df = pd.DataFrame(list(stock_totals.values("bean__name", "total_quantity")))
-    fig = px.bar(
-        df,
-        x="bean__name",
-        y="total_quantity",
-        title="Stock Totals",
-        labels={"bean__name": "Bean", "total_quantity": "Total Quantity"},
-        color_discrete_sequence=color,
-    )
+    fig = go.Figure()
+    for index, row in df.iterrows():
+        fig.add_trace(go.Bar(
+            x=[row['bean__name']],
+            y=[row['total_quantity']],
+            marker=dict(color=color[0],),
+            name=row['bean__name']
+        ))
+    
     fig.update_layout(
-            yaxis_title=None,
-            xaxis_title=None,
-            title=None,
-            margin=dict(l=0, r=0, t=40, b=20),
-            plot_bgcolor='#ffffff',
-        )
-    fig.update_yaxes(gridcolor='#f1f1f1')
+        title="Stock Totals",
+        xaxis_title="",
+        yaxis_title="",
+        plot_bgcolor='#ffffff',
+        margin=dict(l=0, r=0, t=40, b=20),
+        bargap=0.15,
+        bargroupgap=0.1,
+        showlegend=False,
+        autosize=True,
+    )
 
     chart_html = fig.to_html()
     return chart_html

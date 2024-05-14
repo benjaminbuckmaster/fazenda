@@ -4,37 +4,41 @@
 <h1>Beans</h1>
 {% if beans %}
 <div class="container-row">
-    <div class="table-container">
-        <table id="bean-info-table">
-            <tr>
-                <th>Name</th>
-                <th>Stock</th>
-            </tr>
-            {% for bean in beans %}
-            <tr>
-                <td>
-                    <a class="clickable-text" href="{% url "bean-details" bean.id %}">
-                        {{ bean.name }}
-                    </a>
-                </td>
-                <td>
-                    <a class="clickable-text" href="{% url "stock-entries-detail" bean.id %}">
-                        {% for stock_total in stock_totals %}
-                        {% if stock_total.bean == bean %}
-                        {% if stock_total.total_quantity < bean.reorder_trigger %}
-                            <div class="low-stock">{{ stock_total.total_quantity }} kg</div>
-                        {% else %}
-                            {{ stock_total.total_quantity }} kg
-                        {% endif %}
-                        {% endif %}
-                        {% endfor %}
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+    <div class="bean-cards">
+        {% for stock_total in stock_totals %}
+        
+        <a href="{% url "bean-details" stock_total.bean.id %}">
+            {% if stock_total.total_quantity < stock_total.bean.reorder_trigger %}
+            <div class="bean-card-low-stock">
+                <div class="bean-card-title">
+                    {{ stock_total.bean.name }}
+                </div>
+                <div class="bean-card-qty">
+                    {{ stock_total.total_quantity }} kg
+                </div>
+                <div class="bean-card-origin">
+                    {{ stock_total.bean.origin }}
+                </div>
+            </div>
+            {% else %}
+            <div class="bean-card">
+                <div class="bean-card-title">
+                    {{ stock_total.bean.name }}
+                </div>
+                <div class="bean-card-qty">
+                    {{ stock_total.total_quantity }} kg
+                </div>
+                <div class="bean-card-origin">
+                    {{ stock_total.bean.origin }}
+                </div>
+            </div>
+            {% endif %}
+        </a>
+        
+        {% endfor %}
     </div>
-    <div class="vertical-space"></div>
+
+    {% comment %} <div class="vertical-space"></div> {% endcomment %}
     <div class="chart-container">
         {{ chart|safe }}
     </div>
