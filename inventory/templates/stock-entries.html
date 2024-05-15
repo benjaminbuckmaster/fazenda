@@ -2,39 +2,36 @@
 
 {% block content %}
 <h1>Stock Entries</h1>
-<div class="stock-entries-body">
-    {% if entries %}
-    <div class="table-container">
-        {% for entry in entries %}
+{% if entries %}
+<div class="stock-entries">
+    {% for entry in entries %}
+    <div class="stock-entry">
+        <h3>{{entry.date}}</h3>
         <table>
-            <th>Date</th>
             <tr>
-                <td>{{entry.date}}</td>
+                <td></td>
                 <td><a class="table-btn" href="{% url "edit-stock-entry" id=entry.id %}">Edit</a></td>
             </tr>
-            <th>Bean</th>
             <tr><td>{{entry.bean}}</td></tr>
             <tr>
-                <th>Quantity Added (kg)</th>
-                <th>Quantity Used (kg)</th>
+                <th>Added</th>
+                <th>Used</th>
             </tr>
             <tr>
-                <td>{{entry.qty_added}}</td>
-                <td>{{entry.qty_used}}</td>
+                <td>{{entry.qty_added}} kg</td>
+                <td>{{entry.qty_used}} kg</td>
             </tr>
             <tr></tr>
         </table>
-        <br>
-        <br>
-        {% endfor %}
     </div>
-    {% else %}
-    <div class="page-info">
-        <p>No entries!</p>
-    </div>
-    {% endif %}
-    <div class="body-btn-container">
-        <a class="body-btn" href="{% url "bean-information" %}">Back</a>
-    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="page-info">
+    <p>No entries!</p>
+</div>
+{% endif %}
+<div class="body-btn-container">
+    <a class="body-btn" href="{% url "bean-information" %}">Back</a>
 </div>
 {% endblock content %}
