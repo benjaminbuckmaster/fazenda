@@ -10,27 +10,17 @@
         <a href="{% url "bean-details" stock_total.bean.id %}">
             {% if stock_total.total_quantity < stock_total.bean.reorder_trigger %}
             <div class="bean-card-low-stock">
-                <div class="bean-card-title">
-                    {{ stock_total.bean.name }}
-                </div>
-                <div class="bean-card-qty">
-                    {{ stock_total.total_quantity }} kg
-                </div>
-                <div class="bean-card-origin">
-                    {{ stock_total.bean.origin }}
-                </div>
+                <p id="bean-card-origin">{{ stock_total.bean.origin }}</p>
+                <p>{{ stock_total.bean.name }}</p>
+                <p id="bean-card-qty">{{ stock_total.total_quantity }} kg</p>
+                <p><a class="btn1" href="{% url "stock-entries-detail" stock_total.bean.id %}">View Entries</a></p>
             </div>
             {% else %}
             <div class="bean-card">
-                <div class="bean-card-title">
-                    {{ stock_total.bean.name }}
-                </div>
-                <div class="bean-card-qty">
-                    {{ stock_total.total_quantity }} kg
-                </div>
-                <div class="bean-card-origin">
-                    {{ stock_total.bean.origin }}
-                </div>
+                <p id="bean-card-origin">{{ stock_total.bean.origin }}</p>
+                <p>{{ stock_total.bean.name }}</p>
+                <p id="bean-card-qty">{{ stock_total.total_quantity }} kg</p>
+                <p><a class="btn1" href="{% url "stock-entries-detail" stock_total.bean.id %}">View Entries</a></p>
             </div>
             {% endif %}
         </a>

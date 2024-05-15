@@ -1,28 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Stock Entries</h1>
+<h1>Stock Entries for {{ bean.origin }} {{ bean.name }}</h1>
 {% if entries %}
 <div class="stock-entries">
     {% for entry in entries %}
     <div class="stock-entry">
         <h3>{{entry.date}}</h3>
-        <table>
-            <tr>
-                <td></td>
-                <td><a class="table-btn" href="{% url "edit-stock-entry" id=entry.id %}">Edit</a></td>
-            </tr>
-            <tr><td>{{entry.bean}}</td></tr>
-            <tr>
-                <th>Added</th>
-                <th>Used</th>
-            </tr>
-            <tr>
-                <td>{{entry.qty_added}} kg</td>
-                <td>{{entry.qty_used}} kg</td>
-            </tr>
-            <tr></tr>
-        </table>
+        <div class="stock-entry-qty">
+            <p>Added</p>
+            <p>{{entry.qty_added}} kg</p>
+        </div>
+        <div class="stock-entry-qty">
+            <p>Used</p>
+            <p>{{entry.qty_used}} kg</p>
+        </div>
+        <a class="btn1" id="edit-stock-entry-btn" href="{% url "edit-stock-entry" id=entry.id %}">Edit</a>
     </div>
     {% endfor %}
 </div>
@@ -31,7 +24,7 @@
     <p>No entries!</p>
 </div>
 {% endif %}
-<div class="body-btn-container">
-    <a class="body-btn" href="{% url "bean-information" %}">Back</a>
+<div>
+    <a class="btn2" href="{% url "bean-information" %}">Back</a>
 </div>
 {% endblock content %}

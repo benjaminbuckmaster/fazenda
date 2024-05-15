@@ -204,17 +204,16 @@ def new_stock_adjustment(request, pk=None):
     
 def view_stock_entries(request, pk=None):
     if request.user.is_authenticated:
-        # initialise values to pass through to page
         context = {}
 
-        # get entries if pk else get all
         if pk:
-            entries = StockEntry.objects.filter(bean=pk).all().order_by('-date') # order by date descending
-        else:
-            entries = StockEntry.objects.all().order_by('-date') # order by date descending
+            bean = Bean.objects.get(id=pk)
+
+        entries = StockEntry.objects.filter(bean=pk).all().order_by('-date') # order by date descending
 
         # define context to pass through
         context['entries'] = entries
+        context['bean'] = bean
 
         # show page
         return render(request, 'stock-entries.html', context)
@@ -269,14 +268,14 @@ def view_stock_adjustments(request, pk=None):
         # initialise values to pass through to page
         context = {}
 
-        # get entries if pk else get all
         if pk:
-            adjustments = StockAdjustment.objects.filter(bean=pk).all().order_by('-date') # order by date descending
-        else:
-            adjustments = StockAdjustment.objects.all().order_by('-date') # order by date descending
+            bean = Bean.objects.get(id=pk)
+
+        adjustments = StockAdjustment.objects.filter(bean=pk).all().order_by('-date') # order by date descending
 
         # define context to pass through
         context['adjustments'] = adjustments
+        context['bean'] = bean
 
         # show page
         return render(request, 'stock-adjustments.html', context)
@@ -378,7 +377,6 @@ def chart_stock_totals(stock_totals):
         ))
     
     fig.update_layout(
-        title="Stock Totals",
         xaxis_title="",
         yaxis_title="",
         plot_bgcolor='#ffffff',

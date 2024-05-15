@@ -42,6 +42,28 @@ p {
     margin: 0px;
 }
 
+.page-info {
+    margin: 40px;
+}
+
+.btn1, .form-btn {
+    border: 1px solid rgb(180, 180, 180);
+    margin: 6px;
+    border-radius: 5px;
+    padding: 4px;
+    width: fit-content;
+}
+
+.btn2 {
+    background-color: rgb(50, 50, 50);
+    color: rgb(230,230,230);
+    border: 1px solid rgb(200, 200, 200);
+    margin: 6px;
+    border-radius: 8px;
+    padding: 8px;
+    width: fit-content;
+}
+
 .message-warning {
     width: fit-content;
     text-align: center;
@@ -187,26 +209,44 @@ form {
     justify-content: end;
 }
 
+.body-btn-container {
+    margin-top: 40px;
+}
+
 #form-cancel-btn {
     color: rgb(50, 50, 50);
 }
 
 #form-save-btn {
-    margin-top: 26px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #new-entry-btn {
     border: 1px solid rgb(180, 180, 180);
 }
 
-.table-container,
-.form-container,
-.chart-container {
+.table-container {
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     margin-top: 20px; /* Adjust margin as needed */
     width: 100%;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+}
+
+.chart-container {
+    width: 50vw;
+    padding: 20px;
 }
 
 .stock-entries {
@@ -217,6 +257,9 @@ form {
 }
 
 .stock-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: 1px solid #e3e3e3;
     /* box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1); */
     background-color: rgba(255,255,255,0.2);
@@ -224,6 +267,13 @@ form {
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 16px;
+}
+
+.stock-entry-qty {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .chart-container {
@@ -251,10 +301,9 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 150px;
-    height: 150px;
-    padding: 4px;
-    margin: 8px;
+    width: 160px;
+    height: 160px;
+    margin: 10px;
     text-align: center;
     border: 1px solid #e3e3e3;
     /* box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1); */
@@ -264,6 +313,10 @@ form {
 
 .bean-card-low-stock {
     background-color: darkred;
+}
+
+.bean-card-low-stock p,
+.bean-card-low-stock a {
     color: white;
 }
 
@@ -275,18 +328,17 @@ form {
     background-color: rgb(125, 0, 0);
 }
 
-.bean-card-qty {
+#bean-card-qty {
     font-size: 1.5rem;
 }
 
-.bean-card-origin {
+#bean-card-origin {
     font-size: 0.7rem;
 }
 
 .vertical-space {
     width: 100px;
 }
-
 
 #consumption-stats {
     display: flex;
