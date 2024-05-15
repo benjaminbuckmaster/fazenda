@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Stock Entries for {{ bean.origin }} {{ bean.name }}</h1>
+<div class="page-title"><h1>Stock Entries for {{ bean.origin }} {{ bean.name }}</h1></div>
+<div>
+    <a class="btn2" id="new-entry-btn" href="{% url "new-stock-entry-detail" pk=bean.id %}">New Entry</a>
+</div>
 {% if entries %}
 <div class="stock-entries">
     {% for entry in entries %}
@@ -24,7 +27,4 @@
     <p>No entries!</p>
 </div>
 {% endif %}
-<div>
-    <a class="btn2" href="{% url "bean-information" %}">Back</a>
-</div>
 {% endblock content %}

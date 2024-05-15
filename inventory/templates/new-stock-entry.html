@@ -1,17 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>New Stock Entry</h1>
-<div class="page-info">
-    <p>Note: you can only enter one entry per day.</p>
-</div>
+<div class="page-title"><h1>New Stock Entry for {{ bean.origin }} {{ bean.name }}</h1></div>
 <div class="new-stock-entry-body">
     <form method="POST" action="">
         {% csrf_token %}
-        <div class="form-container">
+            <div class="new-stock-entry">
+                <div class="new-stock-entry-qty">
+                    <p>Added</p>
+                    <p>{{form.qty_added}} kg</p>
+                </div>
+                <div class="new-stock-entry-qty">
+                    <p>Used</p>
+                    <p>{{form.qty_used}} kg</p>
+                </div>
+                <div class="form-btn-container">
+                    <button class="form-btn" id="form-save-btn" name="save">Save</button>
+                </div>
+            </div>
+
+{% comment %} 
             <table>
-                <th>Bean</th>
-                <tr><td>{{form.bean}}</td></tr>
                 <th>Quantity Used (kg)</th>
                 <tr><td>{{form.qty_used}}</td></tr>
                 <th>Quantity Added (kg)</th>
@@ -19,11 +28,7 @@
             </table>
             <div class="form-btn-container">
                 <button class="form-btn" id="form-save-btn" name="save">Save</button>
-            </div>
-        </div>
+            </div> {% endcomment %}
     </form>
-    <div class="body-btn-container">
-        <a class="body-btn" href="{% url "bean-information" %}">Back</a>
-    </div>
 </div>
 {% endblock content %}

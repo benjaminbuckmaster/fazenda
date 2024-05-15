@@ -1,19 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Bean Details</h1>
+<h1>{{ bean.origin }} {{ bean.name }}</h1>
 <div class="bean-details-body">
+    <div class="body-btn-container">
+        <a class="btn2" href="{% url "stock-entries-detail" bean.id %}">Stock Entries</a>
+        <a class="btn2" href="{% url "stock-adjustments-detail" pk=bean.id %}">Stock Adjustments</a>
+    </div>
     <form method="POST" action="">
         {% csrf_token %}
         <div class="form-container">
             <table>
-                <th>Name</th>
-                <tr>
-                    <td>{{ form.name }}</td>
-                </tr>
                 <th>Origin</th>
                 <tr>
                     <td>{{ form.origin }}</td>
+                </tr>
+                <th>Name</th>
+                <tr>
+                    <td>{{ form.name }}</td>
                 </tr>
                 <th>Supplier</th>
                 <tr>
@@ -37,12 +41,6 @@
             </div>
         </div>
     </form>
-    <div class="body-btn-container">
-        <a class="btn2" id="new-entry-btn" href="{% url "new-stock-entry-detail" pk=bean.id %}">New Entry</a>
-        <a class="btn2" href="{% url "stock-entries-detail" bean.id %}">View Entries</a>
-        <a class="btn2" href="{% url "stock-adjustments-detail" pk=bean.id %}">Stock Adjustments</a>
-        <a class="btn2" href="{% url "bean-information" %}">Back</a>
-    </div>
 </div>
 
 {% endblock content %}

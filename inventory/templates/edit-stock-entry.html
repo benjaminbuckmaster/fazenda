@@ -2,8 +2,6 @@
 
 {% block content %}
 <h1>Edit Entry</h1>
-<div class="page-info">
-</div>
 <div class="edit-stock-entry-body">
     <form method="POST" action="">
         {% csrf_token %}
@@ -23,8 +21,5 @@
             </div>
         </div>
     </form>
-    <div class="body-btn-container">
-        <a class="body-btn" href="{% url "bean-information" %}">Back</a>
-    </div>
 </div>
 {% endblock content %}

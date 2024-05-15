@@ -202,20 +202,16 @@ def new_stock_adjustment(request, pk=None):
         messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
     
-def view_stock_entries(request, pk=None):
+def view_stock_entries(request, pk):
     if request.user.is_authenticated:
         context = {}
 
-        if pk:
-            bean = Bean.objects.get(id=pk)
-
-        entries = StockEntry.objects.filter(bean=pk).all().order_by('-date') # order by date descending
-
-        # define context to pass through
-        context['entries'] = entries
+        bean = Bean.objects.get(id=pk)
         context['bean'] = bean
 
-        # show page
+        entries = StockEntry.objects.filter(bean=pk).all().order_by('-date') # order by date descending
+        context['entries'] = entries
+
         return render(request, 'stock-entries.html', context)
 
     else:

@@ -46,11 +46,15 @@ p {
     margin: 40px;
 }
 
+.page-title {
+    margin-bottom: 20px;
+}
+
 .btn1, .form-btn {
     border: 1px solid rgb(180, 180, 180);
     margin: 6px;
     border-radius: 5px;
-    padding: 4px;
+    padding: 4px 12px;
     width: fit-content;
 }
 
@@ -60,7 +64,7 @@ p {
     border: 1px solid rgb(200, 200, 200);
     margin: 6px;
     border-radius: 8px;
-    padding: 8px;
+    padding: 8px 12px;
     width: fit-content;
 }
 
@@ -124,10 +128,6 @@ nav {
 
 .login-container h2 {
     margin-bottom: 20px;
-}
-
-form {
-    width: auto;
 }
 
 .app-title {
@@ -210,7 +210,10 @@ form {
 }
 
 .body-btn-container {
-    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px 0px;
 }
 
 #form-cancel-btn {
@@ -238,7 +241,6 @@ form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: 20px;
     padding: 12px;
     border: 1px solid #e3e3e3;
     border-radius: 10px;
@@ -256,24 +258,42 @@ form {
     width: 50vw;
 }
 
-.stock-entry {
+.stock-entry,
+.new-stock-entry {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
     border: 1px solid #e3e3e3;
     /* box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1); */
     background-color: rgba(255,255,255,0.2);
     border-radius: 10px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 30px;
     padding: 16px;
 }
 
-.stock-entry-qty {
+.stock-entry {
+    width: 250px;
+    height: 180px;
+}
+
+.stock-entry-qty,
+.new-stock-entry-qty {
     display: flex;
-    flex-direction: row;
-    width: 100%;
+    margin-bottom: 8px;
     justify-content: space-between;
+}
+
+.new-stock-entry-qty {
+    flex-direction: column;
+}
+
+.stock-entry-qty {
+    width: 60%;
+}
+
+.new-stock-entry-qty p {
+    font-size: 1.1rem;
 }
 
 .chart-container {
@@ -355,6 +375,10 @@ canvas#pieChart {
     height: 450px !important;
 }
 
+input {
+    width: 100%;
+}
+
 table {
     width: 500px;
 }
@@ -402,10 +426,6 @@ textarea {
 
 select {
     height: 35px;
-}
-
-input {
-    width: 90%;
 }
 
 button:focus, input:focus, select:focus, textarea:focus {
@@ -517,6 +537,25 @@ footer {
     /* text-decoration: none; */
 }
 
+@media only screen and (max-width: 900px) {
+    .nav-bar-title {
+        font-size: 1.65rem;
+        font-weight: 700;
+        margin: auto;
+    }
+
+    .nav-list, .user-info {
+        display: none;
+    }
+
+    .nav-list-mobile {
+        display: flex;
+        position: absolute;
+        right: 0;
+        margin: 20px;
+    }
+}
+
 @media only screen and (max-width: 550px) {
 
     .nav-bar-logo {
@@ -576,6 +615,11 @@ footer {
 
     .container-row {
         flex-direction: column;
+    }
+
+    .body-btn-container {
+        flex-direction: column;
+        align-items: center;
     }
 
 }
