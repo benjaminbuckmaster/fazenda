@@ -1,32 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Stock Adjustments</h1>
-<div class="stock-adjustments-body">
-    {% if adjustments %}
-    <div class="table-container">
-        {% for adjustment in adjustments %}
-        <table>
-            <th>Date</th>
-            <tr><td>{{adjustment.date}}</td></tr>
-            <th>Bean</th>
-            <tr><td>{{adjustment.bean}}</td></tr>
-            <th>Adjustment Amount</th>
-            <tr><td>{{adjustment.adj_amount}}</td></tr>
-            <tr><td><a class="table-btn" href="{% url "edit-stock-adjustment" id=adjustment.id %}">Edit</a></td></tr>
-        </table>
-        <br>
-        <br>
-        {% endfor %}
-    </div>
-    {% else %}
-    <div class="page-info">
-        <p>No adjustments!</p>
-    </div>
-    {% endif %}
-    <div class="body-btn-container">
-        <a class="body-btn" href="{% url "new-stock-adjustment" %}">Create Adjustment</a>
-        <a class="body-btn" href="{% url "bean-information" %}">Back</a>
-    </div>
+<div class="page-title"><h1>Stock Adjustments for {{ bean.origin }} {{ bean.name }}</h1></div>
+<div class="body-btn-container">
+    <a class="btn2" id="new-adjustment-btn" href="{% url "new-stock-adjustment" %}">New Adjustment</a>
 </div>
+
+{% if adjustments %}
+<div class="stock-entries">
+    {% for adjustment in adjustments %}
+    <div class="stock-entry">
+        <h3>{{adjustment.date}}</h3>
+        <div class="stock-adjustment-qty">
+            <p class="bold-text">Adjustment</p>
+            <p>{{adjustment.adj_amount}} kg</p>
+        </div>
+        <a class="btn1" id="edit-stock-entry-btn" href="{% url "edit-stock-adjustment" id=adjustment.id %}">Edit</a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="page-info">
+    <p>No entries!</p>
+</div>
+{% endif %}
+
 {% endblock content %}

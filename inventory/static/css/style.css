@@ -31,6 +31,10 @@ a {
     text-decoration: none;
 }
 
+.bold-text {
+    font-weight: 700;
+}
+
 ul {
     margin: auto;
     list-style: none;
@@ -225,7 +229,8 @@ nav {
     margin-bottom: 20px;
 }
 
-#new-entry-btn {
+#new-entry-btn,
+#new-adjustment-btn {
     border: 1px solid rgb(180, 180, 180);
 }
 
@@ -292,8 +297,20 @@ nav {
     width: 60%;
 }
 
+.stock-adjustment-qty {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+}
+
 .new-stock-entry-qty p {
     font-size: 1.1rem;
+}
+
+.new-stock-entry-qty-input {
+    display: flex;
+    flex-direction: row;
 }
 
 .chart-container {

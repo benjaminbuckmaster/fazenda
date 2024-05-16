@@ -15,7 +15,7 @@ class Bean(models.Model):
 
     # override string representation for developing purposes
     def __str__(self) -> str:
-        return f"{self.name}"
+        return f"{self.origin} {self.name}"
     
 class ProductLabel(models.Model):
     product = models.OneToOneField('Product', on_delete=models.CASCADE, related_name='label')

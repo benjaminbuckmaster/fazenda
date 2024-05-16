@@ -1,34 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="page-title"><h1>New Stock Entry for {{ bean.origin }} {{ bean.name }}</h1></div>
+<div class="page-title"><h1>New Stock Entry</h1></div>
 <div class="new-stock-entry-body">
     <form method="POST" action="">
         {% csrf_token %}
-            <div class="new-stock-entry">
-                <div class="new-stock-entry-qty">
-                    <p>Added</p>
-                    <p>{{form.qty_added}} kg</p>
-                </div>
-                <div class="new-stock-entry-qty">
-                    <p>Used</p>
-                    <p>{{form.qty_used}} kg</p>
-                </div>
-                <div class="form-btn-container">
-                    <button class="form-btn" id="form-save-btn" name="save">Save</button>
+        <div class="new-stock-entry">
+            <div class="new-stock-entry-qty">
+                <p class="bold-text">Bean</p>
+                <p>{{form.bean}}</p>
+            </div>
+            <div class="new-stock-entry-qty">
+                <p class="bold-text">Added</p>
+                <div class="new-stock-entry-qty-input">
+                    <p>{{form.qty_added}}</p>
+                    <p>kg</p>
                 </div>
             </div>
-
-{% comment %} 
-            <table>
-                <th>Quantity Used (kg)</th>
-                <tr><td>{{form.qty_used}}</td></tr>
-                <th>Quantity Added (kg)</th>
-                <tr><td>{{form.qty_added}}</td></tr>
-            </table>
+            <div class="new-stock-entry-qty">
+                <p class="bold-text">Used</p>
+                <div class="new-stock-entry-qty-input">
+                    <p>{{form.qty_used}}</p>
+                    <p>kg</p>
+                </div>
+            </div>
             <div class="form-btn-container">
                 <button class="form-btn" id="form-save-btn" name="save">Save</button>
-            </div> {% endcomment %}
+            </div>
+        </div>
     </form>
 </div>
 {% endblock content %}

@@ -113,6 +113,7 @@ def new_stock_entry(request, pk=None):
                     return redirect('bean-information')
                 if form.is_valid():
                     form.save()
+                    messages.success(request, "New entry added.")
                     return redirect('bean-information')
             elif 'cancel' in request.POST:
                 return redirect('bean-information')
@@ -151,6 +152,7 @@ def bean_details(request, pk):
                 form = BeanDetailsForm(request.POST, instance=bean)
                 if form.is_valid():
                     form.save()
+                    messages.success(request, "Changes saved.")
                     return redirect('bean-information')
             elif 'cancel' in request.POST:
                 return redirect('bean-information')
