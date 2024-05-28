@@ -31,24 +31,24 @@ def home(request):
             messages.error(request, "Login error. Plase try again.")
             return redirect('home')
         
-    # # Check if the page is being rendered after a successful login or a manual refresh
-    # if request.method == 'GET':
-    #     # Instantiate TodoistController
-    #     todoist = TodoistController()
+    # Check if the page is being rendered after a successful login or a manual refresh
+    if request.method == 'GET':
+        # Instantiate TodoistController
+        todoist = TodoistController()
 
-    #     # Fetch data from Todoist API
-    #     todoist_today = todoist.get_today()
-    #     todoist_overdue = todoist.get_overdue()
+        # Fetch data from Todoist API
+        todoist_today = todoist.get_today()
+        todoist_overdue = todoist.get_overdue()
 
-    #     # Add fetched data to context
-    #     context = {
-    #         'todoist_today': todoist_today,
-    #         'todoist_overdue': todoist_overdue,
-    #         'api_in_progress': True  # Set a flag indicating that the API call is in progress
-    #     }
+        # Add fetched data to context
+        context = {
+            'todoist_today': todoist_today,
+            'todoist_overdue': todoist_overdue,
+            'api_in_progress': True  # Set a flag indicating that the API call is in progress
+        }
 
-    #     # Show the homepage
-    #     return render(request, 'home.html', context)
+        # Show the homepage
+        return render(request, 'home.html', context)
 
     # Default case
     return render(request, 'home.html')
@@ -140,6 +140,8 @@ def bean_details(request, pk):
             "notes":bean.notes,
             "reorder_trigger":bean.reorder_trigger,
             "reorder_qty":bean.reorder_qty,
+            "is_hidden":bean.is_hidden,
+            "is_ordered":bean.is_ordered
         })
 
         # context to pass through

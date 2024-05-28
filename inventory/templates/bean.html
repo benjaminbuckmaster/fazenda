@@ -6,24 +6,22 @@
 <div class="container-row">
     <div class="bean-cards">
         {% for stock_total in stock_totals %}
-        
+        {% if not stock_total.bean.is_hidden %}
         <a href="{% url "bean-details" stock_total.bean.id %}">
-            {% if stock_total.total_quantity < stock_total.bean.reorder_trigger %}
+            {% if stock_total.bean.is_ordered %}
+            <div class="bean-card-ordered">
+            {% elif stock_total.total_quantity < stock_total.bean.reorder_trigger %}
             <div class="bean-card-low-stock">
-                <p id="bean-card-origin">{{ stock_total.bean.origin }}</p>
-                <p>{{ stock_total.bean.name }}</p>
-                <p id="bean-card-qty">{{ stock_total.total_quantity }} kg</p>
-                <p><a class="btn1" href="{% url "stock-entries-detail" stock_total.bean.id %}">View Entries</a></p>
-            </div>
             {% else %}
             <div class="bean-card">
+            {% endif %}
                 <p id="bean-card-origin">{{ stock_total.bean.origin }}</p>
                 <p>{{ stock_total.bean.name }}</p>
                 <p id="bean-card-qty">{{ stock_total.total_quantity }} kg</p>
                 <p><a class="btn1" href="{% url "stock-entries-detail" stock_total.bean.id %}">View Entries</a></p>
             </div>
-            {% endif %}
         </a>
+        {% endif %}
         
         {% endfor %}
     </div>

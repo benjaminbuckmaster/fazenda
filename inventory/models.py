@@ -12,6 +12,8 @@ class Bean(models.Model):
     notes = models.CharField(max_length=500, blank=True)
     reorder_trigger = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     reorder_qty = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    is_hidden = models.BooleanField(default=False)
+    is_ordered = models.BooleanField(default=False)
 
     # override string representation for developing purposes
     def __str__(self) -> str:

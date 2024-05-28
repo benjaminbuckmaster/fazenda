@@ -334,7 +334,9 @@ nav {
     align-content: flex-start;
 }
 
-.bean-card, .bean-card-low-stock {
+.bean-card,
+.bean-card-low-stock,
+.bean-card-ordered {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -348,12 +350,18 @@ nav {
     border-radius: 10px;
 }
 
+.bean-card-ordered {
+    background-color: rgb(178, 88, 36);
+}
+
 .bean-card-low-stock {
     background-color: darkred;
 }
 
 .bean-card-low-stock p,
-.bean-card-low-stock a {
+.bean-card-low-stock a,
+.bean-card-ordered p,
+.bean-card-ordered a {
     color: white;
 }
 

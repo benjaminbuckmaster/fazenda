@@ -26,6 +26,8 @@ class BeanDetailsForm(forms.ModelForm):
             "notes",
             "reorder_trigger",
             "reorder_qty",
+            "is_hidden",
+            "is_ordered"
         ]
         widgets = {
             'notes': forms.Textarea(attrs={'placeholder':'Notes'})
