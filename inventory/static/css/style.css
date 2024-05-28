@@ -234,12 +234,17 @@ nav {
     border: 1px solid rgb(180, 180, 180);
 }
 
-.table-container {
+.table-container,
+.consumption-container {
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     margin-top: 20px; /* Adjust margin as needed */
     width: 100%;
+}
+
+.consumption-container {
+    flex-direction: column;
 }
 
 .form-container {
