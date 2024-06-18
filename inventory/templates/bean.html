@@ -15,7 +15,7 @@
             {% else %}
             <div class="bean-card">
             {% endif %}
-                <p id="bean-card-origin">{{ stock_total.bean.origin }}</p>
+                {% comment %} <p id="bean-card-origin">{{ stock_total.bean.origin }}</p> {% endcomment %}
                 <p>{{ stock_total.bean.name }}</p>
                 <p id="bean-card-qty">{{ stock_total.total_quantity }} kg</p>
                 <p><a class="btn1" href="{% url "stock-entries-detail" stock_total.bean.id %}">View Entries</a></p>

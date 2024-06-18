@@ -6,70 +6,24 @@ from django.dispatch import receiver
 
 class Bean(models.Model):
     name = models.CharField(max_length=50)
-    origin = models.CharField(max_length=50, blank=True)
     supplier = models.CharField(max_length=50, blank=True)
-    cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Price per kg")
     notes = models.CharField(max_length=500, blank=True)
     reorder_trigger = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     reorder_qty = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     is_hidden = models.BooleanField(default=False)
     is_ordered = models.BooleanField(default=False)
 
-    # override string representation for developing purposes
+    @property
+    def origin(self):
+        # Return the first word of name as origin
+        if self.name:
+            return self.name.split()[0]
+        return ''
+
     def __str__(self) -> str:
-        return f"{self.origin} {self.name}"
+        return f"{self.name}"
     
-class ProductLabel(models.Model):
-    product = models.OneToOneField('Product', on_delete=models.CASCADE, related_name='label')
-    label_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    
-    def __str__(self) -> str:
-        return f"{self.product}"
-    
-class Packaging(models.Model):
-    size = models.CharField(max_length=50)
-    bag_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    product_label = models.OneToOneField(ProductLabel, null=True, on_delete=models.CASCADE, related_name='packaging')
-    
-    def __str__(self) -> str:
-        return f"{self.size}"
-
-class Shipping(models.Model):
-    name = models.CharField(max_length=100)
-    shipping_label = models.CharField(max_length=100)
-    mailer = models.CharField(max_length=100)
-    shipping_fee = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self) -> str:
-        return f"{self.name}" 
-
-class Product(models.Model):
-    name = models.CharField(max_length=100)
-    size = models.CharField(max_length=50)
-    rrp = models.DecimalField(max_digits=10, decimal_places=2) 
-
-    def __str__(self) -> str:
-        return f"{self.name} {self.size}" 
-    
-class ProductBean(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    bean = models.ForeignKey(Bean, on_delete=models.CASCADE)
-    percentage = models.DecimalField(max_digits=10, decimal_places=2, default=100.00)
-
-    def __str__(self) -> str:
-        return f"{self.product} {self.bean.name}"
-    
-class ProductPackaging(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    packaging = models.ForeignKey(Packaging, on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return f"{self.product}"
-
-class ProductShipping(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    shipping = models.ForeignKey(Shipping, on_delete=models.CASCADE)
-
 class StockEntry(models.Model):
     date = models.DateField(default=date.today, editable=True) # auto_now_add set to true for creation date
     bean = models.ForeignKey("Bean", on_delete=models.CASCADE)

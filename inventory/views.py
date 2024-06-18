@@ -1,11 +1,12 @@
 from datetime import date, timedelta
 from decimal import Decimal
 from django.db.models import Sum
+from django.forms import formset_factory
 from django.utils import timezone
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Bean, Product, ProductBean, ProductPackaging, ProductShipping, Shipping, StockEntry, StockAdjustment, StockTotal
+from .models import Bean, StockEntry, StockAdjustment, StockTotal
 from .forms import StockEntryForm, BeanDetailsForm, StockAdjustmentForm
 from .todoist_controller import TodoistController # type: ignore
 import plotly.express as px
@@ -137,6 +138,7 @@ def bean_details(request, pk):
             "name":bean.name,
             "origin":bean.origin,
             "supplier":bean.supplier,
+            "cost":bean.cost,
             "notes":bean.notes,
             "reorder_trigger":bean.reorder_trigger,
             "reorder_qty":bean.reorder_qty,
@@ -389,31 +391,3 @@ def chart_stock_totals(stock_totals):
 
     chart_html = fig.to_html()
     return chart_html
-    
-def calculate_cogs(product):
-    raw_cost = Decimal(0)
-    
-    productbeans = ProductBean.objects.filter(product=product)
-    for productbean in productbeans:
-        if productbean.product.size == '250g':
-            raw_cost += productbean.bean.cost * Decimal('0.25') * (productbean.percentage / 100)
-        elif productbean.product.size == '500g':
-            raw_cost += productbean.bean.cost * Decimal('0.5') * (productbean.percentage / 100)
-        else:
-            raw_cost += productbean.bean.cost * (productbean.percentage / 100)
-        
-    cogs = raw_cost * Decimal('1.2')
-    return cogs
-
-def product_pricing(request):
-    if request.user.is_authenticated:
-        context = {}
-        products = Product.objects.all()
-        for product in products:
-            cogs = calculate_cogs(product)
-            context[product] = cogs
-
-        return render(request, 'product-pricing.html', {'product_costs': context})
-    else:
-        messages.error(request, "You must be logged in to view this page.")
-        return redirect('home')

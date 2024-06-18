@@ -20,8 +20,6 @@ urlpatterns = [
 
     path('statistics/', views.statistics, name='statistics'),
 
-    path('product-pricing/', views.product_pricing, name='product-pricing'),
-
     path('bean-details/<int:pk>', views.bean_details, name='bean-details'),
     path('logout/', views.logout_user, name='logout'),
     

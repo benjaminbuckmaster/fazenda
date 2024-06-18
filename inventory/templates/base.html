@@ -35,12 +35,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'product-pricing' %}">
-                        Pricing
-                    </a>
-                </li>
-            
-                <li>
                     <a href="{% url 'statistics' %}">
                     {% comment %} <img class="nav-item-ico" src="{% static 'img/stats.png' %}" alt=""> {% endcomment %}
                     Stats
@@ -59,7 +53,6 @@
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="{% url 'bean-information' %}">Beans</a></li>
-                        <li><a href="{% url 'product-pricing' %}">Pricing</a></li>
                         <li><a href="{% url 'statistics' %}">Stats</a></li>
                         <br>
                         <li>{{ user.username }}</li>

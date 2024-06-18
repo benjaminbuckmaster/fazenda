@@ -2,26 +2,24 @@
 
 {% block content %}
 <div class="page-title"><h1>New Stock Adjustment</h1></div>
-<div class="new-stock-entry-body">
-    <form method="POST" action="">
-        {% csrf_token %}
-        <div class="new-stock-entry">
-            <div class="new-stock-entry-qty">
-                <p class="bold-text">Bean</p>
-                <p>{{form.bean}}</p>
-            </div>
-            <div class="new-stock-entry-qty">
-                <p class="bold-text">Adjustment</p>
-                <div class="new-stock-entry-qty-input">
-                    <p>{{form.adj_amount}}</p>
-                    <p>kg</p>
-                </div>
-            </div>
-            <div class="form-btn-container">
-                <button class="form-btn" id="form-save-btn" name="save">Save</button>
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="new-stock-entry">
+        <div class="new-stock-entry-qty">
+            <p class="bold-text">Bean</p>
+            <p>{{form.bean}}</p>
+        </div>
+        <div class="new-stock-entry-qty">
+            <p class="bold-text">Adjustment</p>
+            <div class="new-stock-entry-qty-input">
+                <p>{{form.adj_amount}}</p>
+                <p>kg</p>
             </div>
         </div>
-    </form>
-</div>
+        <div class="form-btn-container">
+            <button class="form-btn" id="form-save-btn" name="save">Save</button>
+        </div>
+    </div>
+</form>
 
 {% endblock content %}

@@ -14,8 +14,8 @@
                 {% endfor %}
             </ul>
             {% else %}
-            {% comment %} <p>No tasks due today</p> {% endcomment %}
-            <p>Currently unavailable. Please go to the app to see tasks.</p>
+            <p>No tasks due today</p>
+            {% comment %} <p>Currently unavailable. Please go to the app to see tasks.</p> {% endcomment %}
             {% endif %}
         </div>
         {% if todoist_overdue %}
@@ -51,9 +51,9 @@
         </div>
         <h4>Admin</h4>
         <div class="dash-links-row2">
-            <div class="dash-link" id="dash-link-zoho-mail">
-                <a href="https://mail.zoho.com.au/zm/#mail/folder/inbox" target="_blank" id="zoho-mail-link"><img class="logo-link" id="zoho-mail-logo" src="{% static 'img/zoho-mail-logo.png' %}" alt="Zoho Mail Logo"></a>
-                <a href="https://mail.zoho.com.au/zm/#mail/folder/inbox" target="_blank" id="zoho-mail-link"><p><strong>Mail</strong></p>
+            <div class="dash-link" id="dash-link-mail">
+                <a href="https://mail.google.com/" target="_blank" id="chat-link"><img class="logo-link" id="gmail-logo" src="{% static 'img/gmail-logo.png' %}" alt="Gmail Logo"></a>
+                <a href="https://mail.google.com/" target="_blank" id="chat-link"><p><strong>Gmail</strong></p>
             </div>
             <div class="dash-link" id="dash-link-zoho-books">
                 <a href="https://books.zoho.com.au/app/" target="_blank" id="zoho-books-link"><img class="logo-link" id="zoho-books-logo" src="{% static 'img/zoho-books-logo.png' %}" alt="Zoho Books Logo"></a>

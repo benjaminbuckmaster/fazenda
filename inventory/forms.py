@@ -21,8 +21,8 @@ class BeanDetailsForm(forms.ModelForm):
         model = Bean
         fields = [
             "name",
-            "origin",
             "supplier",
+            "cost",
             "notes",
             "reorder_trigger",
             "reorder_qty",
