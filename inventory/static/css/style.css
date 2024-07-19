@@ -29,6 +29,7 @@ h2 {
 
 h4 {
     color: black;
+    margin: 0;
 }
 
 a {
@@ -120,6 +121,7 @@ p {
 nav {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 60px;
     width: 100vw;
     position: -webkit-sticky;
@@ -142,19 +144,19 @@ nav {
 .app-title {
     display: flex;
     align-items: center;
-    position: absolute;
-    left: 0;
 }
 
 .nav-bar-logo {
-    margin: 20px;
-    height: 36px;
+    margin: 12px;
+    height: 60%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .nav-bar-title {
     font-size: 1.7rem;
     font-weight: 700;
-    margin: auto;
 }
 
 .nav-list {
@@ -188,6 +190,20 @@ nav {
 
 .nav-item-ico {
     width: 40px;
+}
+
+.nav-block-item {
+    padding: 20px;
+    border: 1px solid #e3e3e3;
+    /* box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.1); */
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.nav-block-item-icon {
+    margin-bottom: 10px;
+    width: 100px;
 }
 
 .page-content {
@@ -471,8 +487,9 @@ input::-webkit-inner-spin-button {
 
 .dash-container {
     display: flex;
+    flex-direction: column;
     margin-top: 20px;
-    width: auto;
+    width: 30%;
 }
 
 .dash-container h1 {
@@ -480,9 +497,26 @@ input::-webkit-inner-spin-button {
     margin: 0px;
 }
 
+.nav-block {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.nav-block-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-icon {
+    width: 100px;
+}
+
 .dash-links-container {
     display: flex;
     flex-direction: column;
+    margin-top: 40px;
 }
 
 .dash-links-row1,
@@ -540,10 +574,13 @@ footer {
 }
 
 @media only screen and (max-width: 900px) {
+    nav {
+        align-items: center;
+    }
+
     .nav-bar-title {
         font-size: 1.65rem;
         font-weight: 700;
-        margin: auto;
     }
 
     .nav-list, .user-info {
@@ -559,16 +596,14 @@ footer {
 }
 
 @media only screen and (max-width: 550px) {
-
     .nav-bar-logo {
-        margin: 20px;
-        height: 32px;
+        margin: 12px;
+        height: 60%;
     }
     
     .nav-bar-title {
         font-size: 1.65rem;
         font-weight: 700;
-        margin: auto;
     }
 
     .nav-list, .user-info {
@@ -589,8 +624,15 @@ footer {
     }
 
     .dropdown-menu li {
+        display: flex;
+        flex-direction: row;
         padding: 10px;
         margin-left: 12px;
+    }
+
+    .dropdown-menu-icon {
+        width: 32px;
+        margin-right: 5px;
     }
 
     .dash-container {

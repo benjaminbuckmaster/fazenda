@@ -17,30 +17,11 @@
 <body>
     <header>
         <nav>
-            <div class="app-title">
+            <a class="nav-bar-title" href="http://www.luckiestreetcoffee.com" target="_blank">
                 <img class="nav-bar-logo" src="{% static 'img/lsc-logo-dark.png' %}" alt="Luckie Street Coffee Logo">
-                <p class="nav-bar-title">Fazenda</p>
-            </div>
+            </a>
+            <a class="nav-bar-title" href="{% url 'home' %}">Fazenda</a>
             {% if user.is_authenticated %}
-            <ul class="nav-list">
-                <li>
-                    <a href="{% url 'home' %}">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'bean-information' %}">
-                        {% comment %} <img class="nav-item-ico" src="{% static 'img/beans.png' %}" alt=""> {% endcomment %}
-                        Beans
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'statistics' %}">
-                    {% comment %} <img class="nav-item-ico" src="{% static 'img/stats.png' %}" alt=""> {% endcomment %}
-                    Stats
-                    </a>
-                </li>
-            </ul>
             <div class="user-info">
                 {{ user.username }}
                 <a id="logout-btn" href="{% url 'logout' %}">Logout</a>
@@ -51,9 +32,9 @@
                       Menu
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'bean-information' %}">Beans</a></li>
-                        <li><a href="{% url 'statistics' %}">Stats</a></li>
+                        {% comment %} <li><a href="{% url 'home' %}">Home</a></li> {% endcomment %}
+                        <li><a href="{% url 'bean-information' %}"><img class="dropdown-menu-icon" src="{% static 'img/beans.png' %}" alt="">Beans</a></li>
+                        <li><a href="{% url 'statistics' %}"><img class="dropdown-menu-icon" src="{% static 'img/stats.png' %}" alt="">Stats</a></li>
                         <br>
                         <li>{{ user.username }}</li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -83,8 +64,8 @@
 
         <footer>
             <ul>
-                <li><a class="footer-btn" href="http://www.luckiestreetcoffee.com" target="_blank">www.luckiestreetcoffee.com.au</a></li>
                 <li>Benjamin Buckmaster 2024</li>
+                <li><a class="footer-btn" id="admin-link" href="{% url 'admin:index' %}">View Admin</a></li>
             </ul>
         </footer>
     </div>

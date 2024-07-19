@@ -4,7 +4,16 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="dash-container">
-    <div class="dash-links-container">
+    <ul class="nav-block">
+        <a href="{% url 'bean-information' %}">
+            <li class="nav-block-item"><img class="nav-block-item-icon" src="{% static 'img/beans.png' %}" alt=""><h4>Beans</h4></li>
+        </a>
+        <a href="{% url 'statistics' %}">
+            <li class="nav-block-item"><img class="nav-block-item-icon" src="{% static 'img/stats.png' %}" alt=""><h4>Stats</h4></li>
+        </a>
+    </ul>
+
+    {% comment %} <div class="dash-links-container">
         <h4>Operations</h4>
         <div class="dash-links-row1">
             <div class="dash-link" id="dash-link-shopify">
@@ -35,7 +44,7 @@
                 <a href="https://digital.bankaust.com.au/accounts/balances/" target="_blank" id="bankaus-link"><p><strong>BankAus</strong></p>
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
 </div>
 
 {% else %}
