@@ -512,19 +512,6 @@ input::-webkit-inner-spin-button {
     width: fit-content;
 }
 
-#dash-item-todoist {
-    flex-direction: column;
-    min-width: 250px;
-    max-width: 300px;
-    height: fit-content;
-}
-
-#dash-link-todoist {
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
 .logo-link {
     width: 40px;
     margin-right: 10px;
@@ -533,21 +520,6 @@ input::-webkit-inner-spin-button {
 #bankaus-logo {
     width: auto;
     height: 40px;
-}
-
-.todoist-tasks {
-    list-style: initial;
-    padding-inline-start: 1em;
-    margin-bottom: 20px;
-}
-
-.todoist-task-block {
-    margin-bottom: 20px;
-}
-
-.todoist-tasks p {
-    color: rgb(50, 50, 50);
-    line-height: 1rem;
 }
 
 footer {

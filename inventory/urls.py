@@ -22,5 +22,7 @@ urlpatterns = [
 
     path('bean-details/<int:pk>', views.bean_details, name='bean-details'),
     path('logout/', views.logout_user, name='logout'),
+
+
     
 ]

@@ -4,35 +4,6 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="dash-container">
-    <div class="dash-item" id="dash-item-todoist">
-        <h2>Due Today</h2>
-        <div class="todoist-task-block">
-            {% if todoist_today %}
-            <ul class="todoist-tasks">
-                {% for task in todoist_today %}
-                <li><a href="{{ task.url }}" target="_blank">{{ task.content }}</a></li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>No tasks due today</p>
-            {% comment %} <p>Currently unavailable. Please go to the app to see tasks.</p> {% endcomment %}
-            {% endif %}
-        </div>
-        {% if todoist_overdue %}
-        <div class="todoist-task-block">
-            <h2>Overdue</h2>
-            <ul class="todoist-tasks">
-                {% for task in todoist_overdue %}
-                <li><a href="{{ task.url }}" target="_blank">{{ task.content }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-        <div id="dash-link-todoist">
-            <a href="https://app.todoist.com/" target="_blank" id="todoist-link"><img class="logo-link" id="todoist-logo" src="{% static 'img/todoist-logo.png' %}" alt="Todoist Logo"></a>
-            <a href="https://app.todoist.com/" target="_blank" id="todoist-link"><p><strong>Todoist</strong></p>
-        </div>
-    </div>
     <div class="dash-links-container">
         <h4>Operations</h4>
         <div class="dash-links-row1">
@@ -66,7 +37,6 @@
         </div>
     </div>
 </div>
-
 
 {% else %}
 <div class="page-info">

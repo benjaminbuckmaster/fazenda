@@ -12,6 +12,8 @@ from .todoist_controller import TodoistController # type: ignore
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     # initialise context to pass through to page
@@ -31,27 +33,7 @@ def home(request):
         else:
             messages.error(request, "Login error. Plase try again.")
             return redirect('home')
-        
-    # Check if the page is being rendered after a successful login or a manual refresh
-    if request.method == 'GET':
-        # Instantiate TodoistController
-        todoist = TodoistController()
 
-        # Fetch data from Todoist API
-        todoist_today = todoist.get_today()
-        todoist_overdue = todoist.get_overdue()
-
-        # Add fetched data to context
-        context = {
-            'todoist_today': todoist_today,
-            'todoist_overdue': todoist_overdue,
-            'api_in_progress': True  # Set a flag indicating that the API call is in progress
-        }
-
-        # Show the homepage
-        return render(request, 'home.html', context)
-
-    # Default case
     return render(request, 'home.html')
 
 def stock_management(request):
