@@ -17,31 +17,33 @@
 <body>
     <header>
         <nav>
-            <a class="nav-bar-title" href="http://www.luckiestreetcoffee.com" target="_blank">
-                <img class="nav-bar-logo" src="{% static 'img/lsc-logo-dark.png' %}" alt="Luckie Street Coffee Logo">
-            </a>
-            <a class="nav-bar-title" href="{% url 'home' %}">Fazenda</a>
-            {% if user.is_authenticated %}
-            <div class="user-info">
-                {{ user.username }}
-                <a id="logout-btn" href="{% url 'logout' %}">Logout</a>
+            <div class="navbox">
+                <a class="nav-bar-title" href="http://www.luckiestreetcoffee.com" target="_blank">
+                    <img class="nav-bar-logo" src="{% static 'img/lsc-logo-dark.png' %}" alt="Luckie Street Coffee Logo">
+                </a>
+                <a class="nav-bar-title" href="{% url 'home' %}">Fazenda</a>
+                {% if user.is_authenticated %}
+                <div class="user-info">
+                    {{ user.username }}
+                    <a id="logout-btn" href="{% url 'logout' %}">Logout</a>
+                </div>
+                <ul class="nav-list-mobile">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Menu
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% comment %} <li><a href="{% url 'home' %}">Home</a></li> {% endcomment %}
+                            <li><a href="{% url 'bean-information' %}"><img class="dropdown-menu-icon" src="{% static 'img/beans.png' %}" alt="">Beans</a></li>
+                            <li><a href="{% url 'statistics' %}"><img class="dropdown-menu-icon" src="{% static 'img/stats.png' %}" alt="">Stats</a></li>
+                            <br>
+                            <li>{{ user.username }}</li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% endif %}
             </div>
-            <ul class="nav-list-mobile">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Menu
-                    </a>
-                    <ul class="dropdown-menu">
-                        {% comment %} <li><a href="{% url 'home' %}">Home</a></li> {% endcomment %}
-                        <li><a href="{% url 'bean-information' %}"><img class="dropdown-menu-icon" src="{% static 'img/beans.png' %}" alt="">Beans</a></li>
-                        <li><a href="{% url 'statistics' %}"><img class="dropdown-menu-icon" src="{% static 'img/stats.png' %}" alt="">Stats</a></li>
-                        <br>
-                        <li>{{ user.username }}</li>
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-            {% endif %}
         </nav>
     </header>
     
