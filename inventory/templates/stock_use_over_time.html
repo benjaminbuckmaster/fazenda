@@ -1,51 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Use Over Time</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <h1>Stock Use Over Time</h1>
-    <canvas id="stockUseChart"></canvas>
-    
+{% extends "base.html" %}
+
+{% block content %}
+<div class="stats-container-title">
+    <h2>Stock Use Over Time</h2>
+</div>
+
+<div>
+    <div id="plotly-chart"></div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const data = JSON.parse('{{ data|escapejs }}');
-            const labels = [...new Set(Object.values(data).flat().map(entry => entry.date))];
-            
-            const datasets = Object.keys(data).map(bean => ({
-                label: bean,
-                data: labels.map(date => {
-                    const entry = data[bean].find(e => e.date === date);
-                    return entry ? entry.qty_used : 0;
-                }),
-                fill: false,
-                borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`, // Random color
-                tension: 0.1
-            }));
-            
-            const ctx = document.getElementById('stockUseChart').getContext('2d');
-            const chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: datasets
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: {
-                                unit: 'day'
-                            }
-                        }
-                    }
-                }
-            });
-        });
+        var graphJson = JSON.parse('{{ graph_json|escapejs }}');
+        Plotly.newPlot('plotly-chart', graphJson.data, graphJson.layout);
     </script>
-</body>
-</html>
+</div>
+
+{% endblock content %}

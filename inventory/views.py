@@ -15,6 +15,7 @@ import plotly.io as pio
 import pandas as pd
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+import json
 
 def home(request):
     # initialise context to pass through to page
@@ -342,19 +343,41 @@ def consumption_30_days(request):
 
     return render(request, 'consumption-30-days.html', {'graph_json': graph_json, 'consumption_data':consumption_data})
 
-def pie_chart_view(request):
-    # Data for the pie chart
-    labels = ['Apples', 'Bananas', 'Cherries', 'Dates']
-    values = [4500, 2500, 1050, 2000]
-
-    # Create the pie chart
-    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+def stock_use_over_time(request):
+    # Query the stock entries
+    stock_entries = (
+        StockEntry.objects.values(
+            'date',
+            'bean__name',
+            'qty_used'
+        )
+    )
+    
+    data = {}
+    for entry in stock_entries:
+        date = entry['date']
+        bean = entry['bean__name']
+        qty_used = entry['qty_used']
+        
+        if bean not in data:
+            data[bean] = []
+        
+        data[bean].append({'date': date, 'qty_used': qty_used})
+    
+    # Prepare data for Plotly scatter plot
+    plotly_data = []
+    for bean, values in data.items():
+        x = [v['date'] for v in values]
+        y = [v['qty_used'] for v in values]
+        plotly_data.append(go.Scatter(x=x, y=y, mode='lines', name=bean))
+    
+    # Create the scatter plot
+    fig = go.Figure(data=plotly_data)
 
     # Convert the plotly figure to JSON
     graph_json = pio.to_json(fig)
 
-    return render(request, 'pie_chart.html', {'graph_json': graph_json})
-
+    return render(request, 'stock_use_over_time.html', {'graph_json': graph_json})
 
 def statistics(request):
     if request.user.is_authenticated:

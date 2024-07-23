@@ -4,16 +4,7 @@
 <h1>Statistics</h1>
 <ul class="stat-list">
     <li><a href="{% url 'consumption-30-days' %}">Consumption 30 Days</a></li>
-    <li><a href="">Usage Over Time</a></li>
+    <li><a href="{% url 'stock-use-over-time' %}">Usage Over Time</a></li>
 </ul>
-
-<div>
-    <h1>Pie Chart</h1>
-    <div id="pie-chart"></div>
-    <script>
-        var graph = {{ graph_json|safe }};
-        Plotly.react('pie-chart', graph.data, graph.layout);
-    </script>
-</div>
 
 {% endblock content %}

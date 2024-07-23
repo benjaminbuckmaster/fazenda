@@ -47,6 +47,10 @@ ul {
     padding-inline-start: 0;
 }
 
+.stat-list {
+    margin-top: 20px;
+}
+
 p {
     text-wrap: wrap;
     margin: 0px;
