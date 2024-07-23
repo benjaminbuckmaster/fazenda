@@ -11,6 +11,7 @@ from .forms import StockEntryForm, BeanDetailsForm, StockAdjustmentForm
 from .todoist_controller import TodoistController # type: ignore
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.io as pio
 import pandas as pd
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -308,40 +309,56 @@ def edit_stock_adjustment(request, id):
         messages.error(request, "You must be logged in to view this page.")
         return redirect('home')
     
+
+def consumption_30_days(request):
+    # Calculate the date 30 days ago
+    thirty_days_ago = date.today() - timedelta(days=30)
+
+    # Filter StockEntry instances in the last 30 days
+    recent_stock_entries = StockEntry.objects.filter(date__gte=thirty_days_ago)
+
+    # Calculate total consumption for each bean in the last 30 days
+    consumption_data = []
+    for bean in Bean.objects.filter(is_hidden=False):
+        total_qty_used = recent_stock_entries.filter(bean=bean).aggregate(Sum('qty_used'))['qty_used__sum'] or 0
+        # Include adjustment if necessary
+        total_adjustment = StockAdjustment.objects.filter(bean=bean, date__gte=thirty_days_ago).aggregate(Sum('adj_amount'))['adj_amount__sum'] or 0
+        total_consumption = total_qty_used + total_adjustment
+
+        consumption_data.append({
+            'bean_name': bean.name,
+            'total_consumption': total_consumption
+        })
+
+    # Extract labels and values for the pie chart
+    labels = [data['bean_name'] for data in consumption_data]
+    values = [data['total_consumption'] for data in consumption_data]
+
+    # Create the pie chart
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+
+    # Convert the plotly figure to JSON
+    graph_json = pio.to_json(fig)
+
+    return render(request, 'consumption-30-days.html', {'graph_json': graph_json, 'consumption_data':consumption_data})
+
+def pie_chart_view(request):
+    # Data for the pie chart
+    labels = ['Apples', 'Bananas', 'Cherries', 'Dates']
+    values = [4500, 2500, 1050, 2000]
+
+    # Create the pie chart
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+
+    # Convert the plotly figure to JSON
+    graph_json = pio.to_json(fig)
+
+    return render(request, 'pie_chart.html', {'graph_json': graph_json})
+
+
 def statistics(request):
-    def beans_consumption_last_30_days():
-        # Calculate the date 30 days ago
-        thirty_days_ago = date.today() - timedelta(days=30)
-
-        # Filter StockEntry instances in the last 30 days
-        recent_stock_entries = StockEntry.objects.filter(date__gte=thirty_days_ago)
-
-        # Calculate total consumption for each bean in the last 30 days
-        consumption_data = []
-        for bean in Bean.objects.filter(is_hidden=False):
-            total_qty_used = recent_stock_entries.filter(bean=bean).aggregate(Sum('qty_used'))['qty_used__sum'] or 0
-            # can include adjustment if decided that it is necessary
-            total_adjustment = StockAdjustment.objects.filter(bean=bean, date__gte=thirty_days_ago).aggregate(Sum('adj_amount'))['adj_amount__sum'] or 0
-            total_consumption = total_qty_used + total_adjustment
-
-            consumption_data.append({
-                'bean_name': bean.name,
-                'total_consumption': total_qty_used
-            })
-
-        return consumption_data
-    
     if request.user.is_authenticated:
-        # initialise values to pass through to page
-        context = {}
-
-        consumption_data_last_30_days = beans_consumption_last_30_days()
-
-        # define context to pass through to page
-        context['consumption_data_last_30_days'] = consumption_data_last_30_days
-
-        # show page
-        return render(request, 'statistics.html', context)
+        return render(request, 'statistics.html')
 
     else:
         messages.error(request, "You must be logged in to view this page.")

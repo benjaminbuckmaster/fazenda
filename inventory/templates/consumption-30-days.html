@@ -1,14 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Statistics</h1>
-<ul class="stat-list">
-    <li><a href="{% url 'consumption-30-days' %}">Consumption 30 Days</a></li>
-    <li><a href="">Usage Over Time</a></li>
-</ul>
+<div class="stats-container-title">
+    <h2>Consumption Last 30 Days</h2>
+</div>
 
 <div>
-    <h1>Pie Chart</h1>
     <div id="pie-chart"></div>
     <script>
         var graph = {{ graph_json|safe }};

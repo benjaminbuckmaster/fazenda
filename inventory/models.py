@@ -2,6 +2,8 @@ from datetime import date
 from django.db import models, transaction
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.shortcuts import render
+from django.db.models import Sum
 
 
 class Bean(models.Model):
@@ -96,3 +98,25 @@ def update_stock_totals(bean):
 @receiver(post_delete, sender=StockAdjustment)
 def update_stock_totals_signal(sender, instance, **kwargs):
     update_stock_totals(instance.bean)
+
+def stock_use_over_time(request):
+    # Query the stock entries and annotate with the cumulative sum
+    stock_entries = (
+        StockEntry.objects
+        .values('date', 'bean__name')
+        .annotate(qty_used=Sum('qty_used'))
+        .order_by('date', 'bean__name')
+    )
+    
+    # Format the data for the chart
+    data = {}
+    for entry in stock_entries:
+        date = entry['date'].strftime('%Y-%m-%d')
+        bean = entry['bean__name']
+        qty_used = entry['qty_used']
+        
+        if bean not in data:
+            data[bean] = []
+        data[bean].append({'date': date, 'qty_used': qty_used})
+    
+    return render(request, 'stock_use_over_time.html', {'data': data})

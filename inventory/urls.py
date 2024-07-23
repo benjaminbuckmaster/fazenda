@@ -19,6 +19,8 @@ urlpatterns = [
     path('edit-stock-adjustment/<int:id>/', views.edit_stock_adjustment, name='edit-stock-adjustment'),
 
     path('statistics/', views.statistics, name='statistics'),
+    # path('stock-use-over-time/', views.stock_use_over_time, name='stock-use-over-time'),
+    path('consumption-30-days/', views.consumption_30_days, name='consumption-30-days'),
 
     path('bean-details/<int:pk>', views.bean_details, name='bean-details'),
     path('logout/', views.logout_user, name='logout'),
