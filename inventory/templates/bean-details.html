@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ bean.origin }} {{ bean.name }}</h1>
+<h1>{{ bean.name }}</h1>
 <div class="body-btn-container">
     <a class="btn2" href="{% url "stock-entries-detail" bean.id %}">Stock Entries</a>
     <a class="btn2" href="{% url "stock-adjustments-detail" pk=bean.id %}">Stock Adjustments</a>
@@ -10,10 +10,6 @@
     {% csrf_token %}
     <div class="form-container">
         <table>
-            <th>Origin</th>
-            <tr>
-                <td>{{ form.origin }}</td>
-            </tr>
             <th>Name</th>
             <tr>
                 <td>{{ form.name }}</td>
