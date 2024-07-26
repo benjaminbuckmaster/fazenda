@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from decimal import Decimal
+from time import strftime
 from django.db.models import Sum
 from django.forms import formset_factory
 from django.utils import timezone
@@ -16,6 +17,10 @@ import pandas as pd
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 import json
+from django.db.models import Sum
+from collections import defaultdict
+from datetime import datetime
+from django.db.models.functions import TruncMonth
 
 def home(request):
     # initialise context to pass through to page
@@ -378,6 +383,46 @@ def stock_use_over_time(request):
     graph_json = pio.to_json(fig)
 
     return render(request, 'stock_use_over_time.html', {'graph_json': graph_json})
+
+def stock_use_per_month(request):
+    # Query the stock entries
+    stock_entries = (
+        StockEntry.objects.values(
+            'date',
+            'bean__name',
+            'qty_used'
+        )
+    )
+    
+    data = {}
+    for entry in stock_entries:
+        date = entry['date'].strftime('%Y-%m')
+        bean = entry['bean__name']
+        qty_used = entry['qty_used']
+        
+        if bean not in data:
+            data[bean] = []
+        
+        data[bean].append({'date': date, 'qty_used': qty_used})
+    
+    # Prepare data for Plotly bar graph
+    plotly_data = []
+    for bean, values in data.items():
+        x = [value['date'] for value in values]
+        y = [value['qty_used'] for value in values]
+        plotly_data.append(go.Bar(x=x, y=y, name=bean))
+    
+    # Create the bar graph
+    fig = go.Figure(data=plotly_data)
+    fig.update_layout(
+        yaxis_title='Quantity Used',
+    )
+
+    # Convert the Plotly figure to JSON
+    graph_json = pio.to_json(fig)
+
+    return render(request, 'stock_use_per_month.html', {'graph_json': graph_json})
+
 
 def statistics(request):
     if request.user.is_authenticated:

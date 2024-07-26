@@ -20,6 +20,7 @@ urlpatterns = [
 
     path('statistics/', views.statistics, name='statistics'),
     path('stock-use-over-time/', views.stock_use_over_time, name='stock-use-over-time'),
+    path('stock-use-per-month/', views.stock_use_per_month, name='stock-use-per-month'),
     path('consumption-30-days/', views.consumption_30_days, name='consumption-30-days'),
 
     path('bean-details/<int:pk>', views.bean_details, name='bean-details'),

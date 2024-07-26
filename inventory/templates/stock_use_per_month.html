@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="stats-container-title">
+    <h2>Stock Use Per Month</h2>
+</div>
+
+<div>
+    <div id="plotly-chart"></div>
+    <script>
+        var graphJson = JSON.parse('{{ graph_json|escapejs }}');
+        Plotly.newPlot('plotly-chart', graphJson.data, graphJson.layout);
+    </script>
+</div>
+
+{% endblock content %}
