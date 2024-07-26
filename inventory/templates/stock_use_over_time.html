@@ -9,6 +9,13 @@
     <div id="plotly-chart"></div>
     <script>
         var graphJson = JSON.parse('{{ graph_json|escapejs }}');
+        graphJson.data.forEach(trace => {
+            trace.mode = 'lines+markers'; // Add markers to all traces
+            trace.marker = {             // Set default marker style
+                size: 6,
+                symbol: 'circle'
+            };
+        });
         Plotly.newPlot('plotly-chart', graphJson.data, graphJson.layout);
     </script>
 </div>
